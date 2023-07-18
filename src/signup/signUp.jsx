@@ -5,18 +5,19 @@ import {
   FormLabel,
   Input,
   InputGroup,
+  HStack,
   InputRightElement,
   Stack,
   Button,
   Heading,
   Text,
   useColorModeValue,
+  Link,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
-import { Link } from "react-router-dom";
 
-export default function Login() {
+export default function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
@@ -30,7 +31,7 @@ export default function Login() {
       <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
         <Stack align={"center"}>
           <Heading fontSize={"xl"} textAlign={"center"}>
-            Login
+            Sign up
           </Heading>
           <Text fontSize={"md"} color={"gray.600"}>
             to enjoy all of our cool features ✌️
@@ -43,6 +44,20 @@ export default function Login() {
           p={8}
         >
           <Stack spacing={4}>
+            <HStack>
+              <Box>
+                <FormControl id="firstName" isRequired>
+                  <FormLabel>First Name</FormLabel>
+                  <Input type="text" />
+                </FormControl>
+              </Box>
+              <Box>
+                <FormControl id="lastName">
+                  <FormLabel>Last Name</FormLabel>
+                  <Input type="text" />
+                </FormControl>
+              </Box>
+            </HStack>
             <FormControl id="email" isRequired>
               <FormLabel>Email address</FormLabel>
               <Input type="email" />
@@ -73,7 +88,7 @@ export default function Login() {
                   bg: "blue.500",
                 }}
               >
-                Log in
+                Sign up
               </Button>
               <Button
                 loadingText="Submitting"
@@ -89,7 +104,7 @@ export default function Login() {
             </Stack>
             <Stack pt={6}>
               <Text align={"center"}>
-                Join Us <Link to={"/signup"} color={"blue.400"}>Sign up</Link>
+                Already a user? <Link color={"blue.400"}>Login</Link>
               </Text>
             </Stack>
           </Stack>
