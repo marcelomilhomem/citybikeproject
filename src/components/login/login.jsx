@@ -1,39 +1,45 @@
 import {
   Flex,
   Box,
-  FormControl,
-  FormLabel,
-  Input,
-  InputGroup,
-  InputRightElement,
   Stack,
   Button,
   Heading,
   Text,
   useColorModeValue,
+  Center,
 } from "@chakra-ui/react";
-import { useState } from "react";
-import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
-import { Link } from "react-router-dom";
+import { UserAuth } from "../../../AuthContext";
+import { FcGoogle } from "react-icons/fc";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
-  const [showPassword, setShowPassword] = useState(false);
+
+  const { signInWithGoogle } = UserAuth();
+  const navigate = useNavigate();
+
+  const handleGoogleSignIn = async () => {
+    try {
+      await signInWithGoogle();
+      navigate("/citybike");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <Flex
-      minH={"100vh"}
-      minW={"100vw"}
       align={"center"}
+      height={"80vh"}
       justify={"center"}
       bg={useColorModeValue("gray.50", "gray.800")}
     >
       <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
         <Stack align={"center"}>
           <Heading fontSize={"xl"} textAlign={"center"}>
-            Login
+            Heyy, Login with Google
           </Heading>
           <Text fontSize={"md"} color={"gray.600"}>
-            to enjoy all of our cool features ✌️
+            to enjoy all of our city bike app ✌️
           </Text>
         </Stack>
         <Box
@@ -43,58 +49,24 @@ export default function Login() {
           p={8}
         >
           <Stack spacing={4}>
-            <FormControl id="email" isRequired>
-              <FormLabel>Email address</FormLabel>
-              <Input type="email" />
-            </FormControl>
-            <FormControl id="password" isRequired>
-              <FormLabel>Password</FormLabel>
-              <InputGroup>
-                <Input type={showPassword ? "text" : "password"} />
-                <InputRightElement h={"full"}>
-                  <Button
-                    variant={"ghost"}
-                    onClick={() =>
-                      setShowPassword((showPassword) => !showPassword)
-                    }
-                  >
-                    {showPassword ? <ViewIcon /> : <ViewOffIcon />}
-                  </Button>
-                </InputRightElement>
-              </InputGroup>
-            </FormControl>
-            <Stack spacing={5} pt={2}>
-              <Button
-                loadingText="Submitting"
-                size="md"
-                bg={"blue.400"}
-                color={"white"}
-                _hover={{
-                  bg: "blue.500",
-                }}
-              >
-                Log in
-              </Button>
-              <Button
-                loadingText="Submitting"
-                size="md"
-                bg={"blue.400"}
-                color={"white"}
-                _hover={{
-                  bg: "blue.500",
-                }}
-              >
-                Sign In With Google
-              </Button>
-            </Stack>
-            <Stack pt={6}>
-              <Text align={"center"}>
-                Join Us{" "}
-                <Link to={"/signup"} color={"blue.400"}>
-                  Sign up
-                </Link>
-              </Text>
-            </Stack>
+            <Button
+              w={"full"}
+              variant={"outline"}
+              leftIcon={<FcGoogle />}
+              loadingText="Submitting"
+              size="md"
+              bg={"gray.200"}
+              color={"white"}
+              _hover={{
+                bg: "blue.300",
+              }}
+              onClick={handleGoogleSignIn}
+            >
+              {" "}
+              <Center>
+                <Text color={"black"}>Sign In With Google</Text>
+              </Center>
+            </Button>
           </Stack>
         </Box>
       </Stack>
