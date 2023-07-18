@@ -89,7 +89,10 @@ export default function Login() {
             </Stack>
             <Stack pt={6}>
               <Text align={"center"}>
-                Join Us <Link to={"/signup"} color={"blue.400"}>Sign up</Link>
+                Join Us{" "}
+                <Link to={"/signup"} color={"blue.400"}>
+                  Sign up
+                </Link>
               </Text>
             </Stack>
           </Stack>

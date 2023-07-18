@@ -1,7 +1,7 @@
-import "firebase/auth";
 import { initializeApp } from "firebase/app";
+import { getAuth, GoogleAuthProvider } from "firebase/auth";
 
-const firebaseconfig = {
+const firebaseConfig = {
   apiKey: "AIzaSyCIyUPgXo9hRtXIyzePcIlLkQQCbU2lP_0",
   authDomain: "mybikeproject-dev.firebaseapp.com",
   projectId: "mybikeproject-dev",
@@ -10,7 +10,6 @@ const firebaseconfig = {
   appId: "1:427275924263:web:3ed3bd2bdcd61991862f02",
 };
 
-const app = initializeApp(firebaseconfig);
-
-export const auth = app.auth();
-export default app;
+const app = initializeApp(firebaseConfig);
+export const auth = getAuth(app);
+export const googleProvider = new GoogleAuthProvider();

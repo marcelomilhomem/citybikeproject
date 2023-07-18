@@ -5,7 +5,6 @@ import {
   FormLabel,
   Input,
   InputGroup,
-  HStack,
   InputRightElement,
   Stack,
   Button,
@@ -16,9 +15,24 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
+import { auth } from "../../firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { UserAuth } from "../../AuthContext";
 
 export default function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const signIn = async () => {
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const { signInWithGoogle, logout, currentUser } = UserAuth();
 
   return (
     <Flex
@@ -31,6 +45,7 @@ export default function SignUp() {
       <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
         <Stack align={"center"}>
           <Heading fontSize={"xl"} textAlign={"center"}>
+            {currentUser && currentUser.email}
             Sign up
           </Heading>
           <Text fontSize={"md"} color={"gray.600"}>
@@ -44,28 +59,17 @@ export default function SignUp() {
           p={8}
         >
           <Stack spacing={4}>
-            <HStack>
-              <Box>
-                <FormControl id="firstName" isRequired>
-                  <FormLabel>First Name</FormLabel>
-                  <Input type="text" />
-                </FormControl>
-              </Box>
-              <Box>
-                <FormControl id="lastName">
-                  <FormLabel>Last Name</FormLabel>
-                  <Input type="text" />
-                </FormControl>
-              </Box>
-            </HStack>
             <FormControl id="email" isRequired>
               <FormLabel>Email address</FormLabel>
-              <Input type="email" />
+              <Input onChange={(e) => setEmail(e.target.value)} type="email" />
             </FormControl>
             <FormControl id="password" isRequired>
               <FormLabel>Password</FormLabel>
               <InputGroup>
-                <Input type={showPassword ? "text" : "password"} />
+                <Input
+                  onChange={(e) => setPassword(e.target.value)}
+                  type={showPassword ? "text" : "password"}
+                />
                 <InputRightElement h={"full"}>
                   <Button
                     variant={"ghost"}
@@ -82,6 +86,7 @@ export default function SignUp() {
               <Button
                 loadingText="Submitting"
                 size="md"
+                onClick={signIn}
                 bg={"blue.400"}
                 color={"white"}
                 _hover={{
@@ -98,8 +103,21 @@ export default function SignUp() {
                 _hover={{
                   bg: "blue.500",
                 }}
+                onClick={signInWithGoogle}
               >
                 Sign In With Google
+              </Button>
+              <Button
+                loadingText="Submitting"
+                size="md"
+                bg={"blue.400"}
+                color={"white"}
+                _hover={{
+                  bg: "blue.500",
+                }}
+                onClick={logout}
+              >
+                Log out
               </Button>
             </Stack>
             <Stack pt={6}>
