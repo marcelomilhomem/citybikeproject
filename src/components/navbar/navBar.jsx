@@ -16,8 +16,17 @@ import { UserAuth } from "../../../AuthContext";
 export default function Nav() {
   const { colorMode, toggleColorMode } = useColorMode();
   const { currentUser, logout } = UserAuth();
+
+  const handleLogOut = async () => {
+    try {
+      await logout();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
-    <Stack direction={"row"}>
+    <Stack direction={"row"} mb={2}>
       <Button onClick={toggleColorMode}>
         {colorMode === "light" ? (
           <MoonIcon color={"black"} />
@@ -55,7 +64,7 @@ export default function Nav() {
             <br />
             <MenuDivider />
             <MenuItem>Account Settings</MenuItem>
-            <MenuItem onClick={logout}>Logout</MenuItem>
+            <MenuItem onClick={handleLogOut}>Logout</MenuItem>
           </MenuList>
         </Menu>
       ) : null}
