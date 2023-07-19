@@ -28,7 +28,7 @@ export default function Login() {
     <Stack minH={"100vh"} direction={{ base: "column", md: "row" }}>
       <Flex p={8} flex={1} align={"center"} justify={"center"}>
         <Stack spacing={4} w={"full"} maxW={"md"}>
-          <Heading fontSize={"6xl"}>Welcome to my bike app</Heading>
+          <Heading fontSize={"6xl"}>Welcome to my City Bike app</Heading>
           <Text fontSize={"2xl"}>
             Login with google to enjoy all of our city bike app ✌️
           </Text>
