@@ -50,7 +50,7 @@ const Testimonial = ({ children }) => {
 const TestimonialContent = ({ children }) => {
   return (
     <Stack
-      bg={useColorModeValue("white", "white")}
+      bg={useColorModeValue("gray.100", "gray.100")}
       boxShadow={"lg"}
       p={8}
       rounded={"xl"}

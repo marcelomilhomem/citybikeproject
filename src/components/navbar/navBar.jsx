@@ -1,6 +1,6 @@
 import {
   Avatar,
-  Button,
+  Button as ChakraButton,
   Menu,
   MenuButton,
   MenuList,
@@ -9,9 +9,14 @@ import {
   Stack,
   useColorMode,
   Center,
+  IconButton,
+  Tooltip,
 } from "@chakra-ui/react";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { UserAuth } from "../../context/AuthContext";
+import { AiOutlineGithub, AiFillLinkedin } from "react-icons/ai";
+import { motion } from "framer-motion";
+import { FaFilePdf } from "react-icons/fa";
 
 export default function Nav() {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -26,18 +31,46 @@ export default function Nav() {
   };
 
   return (
-    <Stack direction={"row"} mb={2}>
-      <Button onClick={toggleColorMode}>
+    <Stack spacing={"20px"} direction={"row"} mb={2}>
+      <Tooltip hasArrow label="Download Cv" aria-label="cv">
+        <motion.div
+          className="box"
+          animate={{
+            scale: [1, 2, 2, 1, 1],
+            rotate: [0, 0, 180, 180, 0],
+            borderRadius: ["0%", "0%", "50%", "50%", "0%"],
+          }}
+          transition={{
+            duration: 2,
+            ease: "easeInOut",
+            times: [0, 0.2, 0.5, 0.8, 1],
+            repeatDelay: 1,
+          }}
+        >
+          <a download href={"MarceloMilhomem.pdf"}>
+            <IconButton colorScheme="pink" icon={<FaFilePdf />} />
+          </a>
+        </motion.div>
+      </Tooltip>
+      <Tooltip hasArrow label="Linkedin" aria-label="linkedin">
+        <IconButton colorScheme="pink" icon={<AiFillLinkedin />} />
+      </Tooltip>
+      <Tooltip hasArrow label="Github" aria-label="github">
+        <IconButton colorScheme="pink" icon={<AiOutlineGithub />} />
+      </Tooltip>
+      <Tooltip hasArrow label={colorMode === 'light' ? 'DarkMode' : 'LightMode'} aria-label='cv'>
+      <ChakraButton variant={"solid"} onClick={toggleColorMode}>
         {colorMode === "light" ? (
-          <MoonIcon color={"black"} />
+          <MoonIcon color={"white"} />
         ) : (
-          <SunIcon color={"whiteAlpha.400"} />
+          <SunIcon color={"white"} />
         )}
-      </Button>
+      </ChakraButton>
+      </Tooltip>
       {currentUser ? (
         <Menu>
           <MenuButton
-            as={Button}
+            as={ChakraButton}
             rounded={"full"}
             variant={"link"}
             cursor={"pointer"}

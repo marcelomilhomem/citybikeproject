@@ -7,12 +7,14 @@ import Protected from "./context/Protected";
 import { AuthContextProvider } from "./context/AuthContext";
 import GoogleMap from "./components/googleMap/googleMap";
 import MapTest from "./components/googleMap/googleMap";
+import { Divider } from "@chakra-ui/react";
 
 function App() {
   return (
     <div>
       <AuthContextProvider>
         <Nav />
+        <Divider />
         <Routes>
           <Route path="/" element={<SignUp />} />
           <Route
