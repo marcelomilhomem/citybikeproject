@@ -3,11 +3,15 @@ import "./App.css";
 import Nav from "./components/navbar/navBar";
 import SignUp from "./components/login/Login";
 import CityBike from "./components/citybike/citybike";
-import Protected from "./components/navbar/Protected";
+import Protected from "./context/Protected";
+import { AuthContextProvider } from "./context/AuthContext";
+import GoogleMap from "./components/googleMap/googleMap";
+import MapTest from "./components/googleMap/googleMap";
 
 function App() {
   return (
     <div>
+      <AuthContextProvider>
       <Nav />
       <Routes>
         <Route path="/" element={<SignUp />} />
@@ -19,7 +23,14 @@ function App() {
             </Protected>
           }
         />
+            <Route
+          path="/map"
+          element={
+              <MapTest />
+          }
+        />
       </Routes>
+      </AuthContextProvider>
     </div>
   );
 }

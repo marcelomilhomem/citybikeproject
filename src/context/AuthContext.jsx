@@ -1,15 +1,17 @@
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { createContext, useContext, useEffect } from "react";
-import { auth, googleProvider } from "./firebase";
+import { auth, googleProvider } from "../firebase";
 import { signInWithPopup } from "firebase/auth";
 
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
 
 // eslint-disable-next-line react/prop-types
 export const AuthContextProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState();
+  const [loading, setLoading] = useState(true);
 
   const signInWithGoogle = async () => {
     try {
@@ -19,14 +21,17 @@ export const AuthContextProvider = ({ children }) => {
     }
   };
 
+  const    navigate = useNavigate()
+
   const logout = () => {
     signOut(auth);
+    navigate('/')
   };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setCurrentUser(user);
-      console.log(currentUser);
+      setLoading(false)
     });
     return () => {
       unsubscribe;
@@ -35,7 +40,7 @@ export const AuthContextProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider value={{ signInWithGoogle, logout, currentUser }}>
-      {children}
+      {!loading && children}
     </AuthContext.Provider>
   );
 };

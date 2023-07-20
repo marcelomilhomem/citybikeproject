@@ -11,7 +11,7 @@ import {
   Center,
 } from "@chakra-ui/react";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
-import { UserAuth } from "../../../AuthContext";
+import { UserAuth } from "../../context/AuthContext";
 
 export default function Nav() {
   const { colorMode, toggleColorMode } = useColorMode();
