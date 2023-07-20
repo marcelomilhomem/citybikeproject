@@ -12,24 +12,19 @@ function App() {
   return (
     <div>
       <AuthContextProvider>
-      <Nav />
-      <Routes>
-        <Route path="/" element={<SignUp />} />
-        <Route
-          path="/citybike"
-          element={
-            <Protected>
-              <CityBike />
-            </Protected>
-          }
-        />
-            <Route
-          path="/map"
-          element={
-              <MapTest />
-          }
-        />
-      </Routes>
+        <Nav />
+        <Routes>
+          <Route path="/" element={<SignUp />} />
+          <Route
+            path="/citybike"
+            element={
+              <Protected>
+                <CityBike />
+              </Protected>
+            }
+          />
+          <Route path="/map" element={<MapTest />} />
+        </Routes>
       </AuthContextProvider>
     </div>
   );

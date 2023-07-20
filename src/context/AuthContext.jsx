@@ -21,17 +21,17 @@ export const AuthContextProvider = ({ children }) => {
     }
   };
 
-  const    navigate = useNavigate()
+  const navigate = useNavigate();
 
   const logout = () => {
     signOut(auth);
-    navigate('/')
+    navigate("/");
   };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setCurrentUser(user);
-      setLoading(false)
+      setLoading(false);
     });
     return () => {
       unsubscribe;

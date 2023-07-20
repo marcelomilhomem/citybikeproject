@@ -13,20 +13,18 @@ import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const { signInWithGoogle, currentUser } = UserAuth();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  console.log('current user before useeffect', currentUser)
+  console.log("current user before useeffect", currentUser);
 
   const handleGoogleSignIn = async () => {
     try {
       await signInWithGoogle();
-      navigate('/citybike')
+      navigate("/citybike");
     } catch (error) {
       console.log(error);
     }
   };
-
-
 
   return (
     <Stack minH={"100vh"} direction={{ base: "column", md: "row" }}>
