@@ -2,7 +2,6 @@ import React from "react";
 import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
 import "./googleMap.css";
 import { Center, Text, Stack } from "@chakra-ui/react";
-import WithSpeechBubbles from "../myDescription/MyDescription";
 
 export default function MapTest() {
   const { isLoaded } = useJsApiLoader({
@@ -21,7 +20,6 @@ export default function MapTest() {
       >
         {isLoaded ? (
           <>
-            <WithSpeechBubbles />
             <GoogleMap
               mapContainerStyle={{
                 width: "100%",

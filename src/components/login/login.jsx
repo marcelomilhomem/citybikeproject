@@ -20,7 +20,7 @@ export default function Login() {
   const handleGoogleSignIn = async () => {
     try {
       await signInWithGoogle();
-      navigate("/citybike");
+      navigate("/landing-page");
     } catch (error) {
       console.log(error);
     }

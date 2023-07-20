@@ -2,12 +2,11 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Nav from "./components/navbar/navBar";
 import SignUp from "./components/login/Login";
-import CityBike from "./components/citybike/citybike";
 import Protected from "./context/Protected";
 import { AuthContextProvider } from "./context/AuthContext";
-import GoogleMap from "./components/googleMap/googleMap";
 import MapTest from "./components/googleMap/googleMap";
 import { Divider } from "@chakra-ui/react";
+import LandingPage from "./components/landingPage/LandingPage";
 
 function App() {
   return (
@@ -18,10 +17,10 @@ function App() {
         <Routes>
           <Route path="/" element={<SignUp />} />
           <Route
-            path="/citybike"
+            path="/landing-page"
             element={
               <Protected>
-                <CityBike />
+                <LandingPage />
               </Protected>
             }
           />

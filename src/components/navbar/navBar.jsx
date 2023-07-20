@@ -58,14 +58,18 @@ export default function Nav() {
       <Tooltip hasArrow label="Github" aria-label="github">
         <IconButton colorScheme="pink" icon={<AiOutlineGithub />} />
       </Tooltip>
-      <Tooltip hasArrow label={colorMode === 'light' ? 'DarkMode' : 'LightMode'} aria-label='cv'>
-      <ChakraButton variant={"solid"} onClick={toggleColorMode}>
-        {colorMode === "light" ? (
-          <MoonIcon color={"white"} />
-        ) : (
-          <SunIcon color={"white"} />
-        )}
-      </ChakraButton>
+      <Tooltip
+        hasArrow
+        label={colorMode === "light" ? "DarkMode" : "LightMode"}
+        aria-label="cv"
+      >
+        <ChakraButton variant={"solid"} onClick={toggleColorMode}>
+          {colorMode === "light" ? (
+            <MoonIcon color={"white"} />
+          ) : (
+            <SunIcon color={"white"} />
+          )}
+        </ChakraButton>
       </Tooltip>
       {currentUser ? (
         <Menu>
