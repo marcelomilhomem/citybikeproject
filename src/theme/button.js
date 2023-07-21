@@ -1,18 +1,18 @@
 export const buttonTheme = {
   variants: {
     solid: () => ({
-      background: `#B875A4`,
+      background: `#ACC196`,
       color: `#FFFFFF`,
       border: "none",
       borderRadius: "4px",
       _hover: {
-        background: `#BD9BB3`,
-        color: `#FFFFFF`,
+        background: `#E9EB9E`,
+        color: `#49475B`,
         border: "none",
       },
       _active: {
-        background: `#A47696`,
-        color: `#FFFFFF`,
+        background: `#799496`,
+        color: `#49475B`,
         border: "none",
       },
     }),

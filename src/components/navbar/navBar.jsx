@@ -11,12 +11,14 @@ import {
   Center,
   IconButton,
   Tooltip,
+  background,
 } from "@chakra-ui/react";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { UserAuth } from "../../context/AuthContext";
 import { AiOutlineGithub, AiFillLinkedin } from "react-icons/ai";
 import { motion } from "framer-motion";
 import { FaFilePdf } from "react-icons/fa";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 
 export default function Nav() {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -28,6 +30,16 @@ export default function Nav() {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const navigate = useNavigate();
+
+  const handleNaviteHomePage = () => {
+    navigate("/landing-page");
+  };
+
+  const handleNaviteMapPage = () => {
+    navigate("/map");
   };
 
   return (
@@ -94,13 +106,15 @@ export default function Nav() {
                 src={"https://avatars.dicebear.com/api/male/username.svg"}
               />
             </Center>
+
             <br />
             <Center>
               <p>{currentUser?.displayName}</p>
             </Center>
             <br />
             <MenuDivider />
-            <MenuItem>Account Settings</MenuItem>
+            <MenuItem onClick={handleNaviteHomePage}>Home</MenuItem>
+            <MenuItem onClick={handleNaviteMapPage}>Map</MenuItem>
             <MenuItem onClick={handleLogOut}>Logout</MenuItem>
           </MenuList>
         </Menu>
