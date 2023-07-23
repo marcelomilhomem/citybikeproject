@@ -7,7 +7,7 @@ import {
   MarkerClusterer,
 } from "@react-google-maps/api";
 import axios from "axios";
-import { Center, Heading } from "@chakra-ui/react";
+import { Button, Center, Heading, Stack } from "@chakra-ui/react";
 
 function Map() {
   const { isLoaded } = useLoadScript({
@@ -16,10 +16,13 @@ function Map() {
 
   const apiURL = "https://api.citybik.es/v2/networks";
 
-  const [activeMarkerId, setActiveMarkerId] = useState(null);
-  const [networks, setNetworks] = useState(null);
-  const [showNetworks, setShowNetworks] = useState(null);
+  const [activeMarkerId, setActiveMarkerId] = useState();
+  const [networks, setNetworks] = useState();
+  const [stations, setStations] = useState();
+  const [showNetworks, setShowNetworks] = useState();
+  const [showStations, setShowStations] = useState();
   const [center, setCenter] = useState({ lat: 38.699708, lng: -9.439973 });
+  const [networkId, setNetworkId] = useState();
 
   const handleActiveMarker = (markerId, latitude, longitude) => {
     if (markerId === activeMarkerId) {
@@ -40,9 +43,25 @@ function Map() {
     fetchNetworks();
   }, []);
 
+   useEffect(() => {
+    if (!networkId) {
+      return;
+    } else {
+      const fetchStation = async () => {
+        const response = await axios.get(`${apiURL}/${networkId}`);
+        const stationData = response.data.network.stations;
+        setShowNetworks(false);
+        setShowStations(true);
+        setStations(stationData);
+      };
+
+      fetchStation();
+    }
+  }, [networkId]); 
+
   return (
     <Fragment>
-      {console.log(networks)}
+      {console.log(stations)}
           {isLoaded ? (
             <GoogleMap
               center={center}
@@ -73,16 +92,54 @@ function Map() {
                           <InfoWindowF
                             onCloseClick={() => setActiveMarkerId(null)}
                           >
-                            <Center>
+                            <Stack>
                               <Heading size={"md"} color={"black"}>
                                 {network.location.city}
                               </Heading>
-                            </Center>
+                              <Button onClick={() => setNetworkId(network.id)} size={'sm'}>Check {network.location.city} Stations</Button>
+                            </Stack>
                           </InfoWindowF>
                         ) : null}
                       </MarkerF>
                     ))
                   }
+                  
+                </MarkerClusterer>
+              )}
+                {showStations && (
+                <MarkerClusterer averageCenter enableRetinaIcons gridSize={60}>
+                  {(clusterer) =>
+                    stations.map((station) => (
+                      <MarkerF
+                        key={station.id}
+                        position={{
+                          lat: station.latitude,
+                          lng: station.longitude,
+                        }}
+                        onClick={() =>
+                          handleActiveMarker(
+                            station.id,
+                            station.latitude,
+                            station.longitude,
+                          )
+                        }
+                        clusterer={clusterer}
+                      >
+                        {activeMarkerId === station.id ? (
+                          <InfoWindowF
+                            onCloseClick={() => setActiveMarkerId(null)}
+                          >
+                            <Stack>
+                              <Heading size={"md"} color={"black"}>
+                                {station.name}
+                              </Heading>
+                            </Stack>
+                          </InfoWindowF>
+                        ) : null}
+                      </MarkerF>
+                    ))
+                  }
+                  
                 </MarkerClusterer>
               )}
             </GoogleMap>
