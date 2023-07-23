@@ -1,15 +1,14 @@
 import { useNavigate } from "react-router-dom";
-import TestimonialComponent from "../testimonial/TestimonialComponent";
+import TestimonialComponent from "../../components/testimonial/TestimonialComponent";
 import "./LandingPage.css";
 import {
   Icon,
   Stack,
   Center,
-  Button,
-  Text,
-  Heading,
+  Button as ChakraButton,
   Wrap,
   WrapItem,
+  Button,
 } from "@chakra-ui/react";
 import {
   SiChakraui,
@@ -90,7 +89,18 @@ function LandingPage() {
         <Wrap spacing={"20px"}>{renderOptions()}</Wrap>
       </Center>
       <Center>
-        <Button onClick={handleMapNavition}>City Bike Map</Button>
+        <Button
+          colorScheme={"green"}
+          bg={"green.400"}
+          rounded={"full"}
+          px={6}
+          _hover={{
+            bg: "green.500",
+          }}
+          onClick={handleMapNavition}
+        >
+          City Bike Map
+        </Button>
       </Center>
     </Stack>
   );

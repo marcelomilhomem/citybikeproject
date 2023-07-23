@@ -12,6 +12,7 @@ import {
   IconButton,
   Tooltip,
   background,
+  Button,
 } from "@chakra-ui/react";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { UserAuth } from "../../context/AuthContext";
@@ -60,33 +61,33 @@ export default function Nav() {
           }}
         >
           <a download href={"MarceloMilhomem.pdf"}>
-            <IconButton colorScheme="pink" icon={<FaFilePdf />} />
+            <IconButton icon={<FaFilePdf />} />
           </a>
         </motion.div>
       </Tooltip>
       <Tooltip hasArrow label="Linkedin" aria-label="linkedin">
-        <IconButton colorScheme="pink" icon={<AiFillLinkedin />} />
+        <IconButton icon={<AiFillLinkedin />} />
       </Tooltip>
       <Tooltip hasArrow label="Github" aria-label="github">
-        <IconButton colorScheme="pink" icon={<AiOutlineGithub />} />
+        <IconButton icon={<AiOutlineGithub />} />
       </Tooltip>
       <Tooltip
         hasArrow
         label={colorMode === "light" ? "DarkMode" : "LightMode"}
         aria-label="cv"
       >
-        <ChakraButton variant={"solid"} onClick={toggleColorMode}>
+        <ChakraButton onClick={toggleColorMode}>
           {colorMode === "light" ? (
-            <MoonIcon color={"white"} />
+            <MoonIcon color={"#1C2321"} />
           ) : (
-            <SunIcon color={"white"} />
+            <SunIcon color={"#1C2321"} />
           )}
         </ChakraButton>
       </Tooltip>
       {currentUser ? (
         <Menu>
           <MenuButton
-            as={ChakraButton}
+            as={Button}
             rounded={"full"}
             variant={"link"}
             cursor={"pointer"}
