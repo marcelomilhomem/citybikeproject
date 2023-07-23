@@ -1,4 +1,9 @@
 .map {
-  height: "70%";
-  width: "60%";
+  height: 60vh;
+  width: 70vw;
+}
+
+.popUp {
+  font-size: '20px';
+  color:black;
 }

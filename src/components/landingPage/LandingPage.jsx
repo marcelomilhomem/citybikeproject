@@ -1,7 +1,16 @@
 import { useNavigate } from "react-router-dom";
 import TestimonialComponent from "../testimonial/TestimonialComponent";
 import "./LandingPage.css";
-import { Icon, Stack, Center, Button, Text, Heading, Wrap, WrapItem } from "@chakra-ui/react";
+import {
+  Icon,
+  Stack,
+  Center,
+  Button,
+  Text,
+  Heading,
+  Wrap,
+  WrapItem,
+} from "@chakra-ui/react";
 import {
   SiChakraui,
   SiTsnode,
@@ -45,7 +54,7 @@ function LandingPage() {
         return (
           <WrapItem key={index}>
             <Icon
-              boxSize="30px" 
+              boxSize="30px"
               as={icon}
               css={{
                 borderRadius: "50%",

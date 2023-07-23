@@ -1,39 +1,97 @@
-import React from "react";
-import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
-import "./googleMap.css";
-import { Center, Text, Stack } from "@chakra-ui/react";
+import React, { Fragment, useState, useEffect } from "react";
+import {
+  GoogleMap,
+  Marker,
+  useJsApiLoader,
+  MarkerClusterer,
+  InfoWindow,
+} from "@react-google-maps/api";
+import { Spinner, Center, Heading } from "@chakra-ui/react";
+import apiBikeService from "../../service/api";
 
-export default function MapTest() {
+function Map() {
+  const [networks, setNetworks] = useState([]);
+  const [showMarkers, setShowMarkers] = useState(false);
+  const [activeMarker, setActiveMarker] = useState(null);
+
   const { isLoaded } = useJsApiLoader({
-    id: "google-map-script",
     googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAP_API_KEY,
   });
 
+  const fetchApi = async () => {
+    try {
+      let response = await apiBikeService.fetchNetworks();
+      setNetworks(response.data.networks);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchApi();
+    // Delay showing the markers by 500ms to ensure the Google Maps API is fully loaded
+    const timerId = setTimeout(() => {
+      setShowMarkers(true);
+    }, 500);
+
+    return () => clearTimeout(timerId);
+  }, []);
+
+  const handleActiveMarker = (marker) => {console.log(marker)
+    if (marker.id === (activeMarker && activeMarker.id)) {
+      setActiveMarker(null);
+    } else {
+      setActiveMarker(marker);
+    }
+  };
+
   return (
-    <Center>
-      <Stack
-        w={"100vw"}
-        h={"100vh"}
-        justify={"center"}
-        alignItems={"center"}
-        spacing={"25px"}
-      >
-        {isLoaded ? (
-          <>
-            <GoogleMap
-              mapContainerStyle={{
-                width: "100%",
-                height: "60%",
-                boxShadow: "",
-              }}
-              center={{ lat: 38.72304884321217, lng: -9.142570395627299 }}
-              zoom={10}
-            ></GoogleMap>
-          </>
-        ) : (
-          <Text>Loading</Text>
-        )}
-      </Stack>
-    </Center>
+    <>
+    <Heading>City Map</Heading>
+    <Fragment>
+      {isLoaded ? (
+        <GoogleMap
+          center={{ lat: 38.699708, lng: -9.439973 }}
+          zoom={10}
+          mapContainerStyle={{
+            width: "100%",
+            height: "50vh",
+          }}
+        >
+          {showMarkers && (
+            <MarkerClusterer gridSize={60}>
+              {(clusterer) =>
+                networks.map((network, index) => (
+                  <Marker
+                    key={index}
+                    position={{
+                      lat: network.location.latitude,
+                      lng: network.location.longitude,
+                    }}
+                    clusterer={clusterer}
+                    onClick={() => handleActiveMarker(network)}
+                  >
+                    {activeMarker && activeMarker.id === network.id ? (
+                      <InfoWindow onCloseClick={() => setActiveMarker(null)}>
+                        <div style={{ color: "black" }}>
+                          <p>{network.location.city}</p>
+                        </div>
+                      </InfoWindow>
+                    ) : null}
+                  </Marker>
+                ))
+              }
+            </MarkerClusterer>
+          )}
+        </GoogleMap>
+      ) : (
+        <Center height={"50vh"}>
+          <Spinner size="xl" />
+        </Center>
+      )}
+    </Fragment>
+    </>
   );
 }
+
+export default Map;

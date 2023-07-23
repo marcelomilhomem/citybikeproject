@@ -7,6 +7,7 @@ import { AuthContextProvider } from "./context/AuthContext";
 import MapTest from "./components/googleMap/googleMap";
 import { Divider } from "@chakra-ui/react";
 import LandingPage from "./components/landingPage/LandingPage";
+import Map from "./components/googleMap/googleMap";
 
 function App() {
   return (
@@ -24,7 +25,7 @@ function App() {
               </Protected>
             }
           />
-          <Route path="/map" element={<MapTest />} />
+          <Route path="/map" element={<Map />} />
         </Routes>
       </AuthContextProvider>
     </div>
