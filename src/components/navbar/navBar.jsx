@@ -11,7 +11,6 @@ import {
   Center,
   IconButton,
   Tooltip,
-  background,
   Button,
 } from "@chakra-ui/react";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";

@@ -4,11 +4,9 @@ import Nav from "./components/navbar/navBar";
 import SignUp from "./components/login/Login";
 import Protected from "./context/Protected";
 import { AuthContextProvider } from "./context/AuthContext";
-import MapTest from "./components/googleMap/googleMap";
 import { Divider } from "@chakra-ui/react";
 import LandingPage from "./pages/landingPage/LandingPage";
-import Map from "./components/googleMap/googleMap";
-import CallToActionWithAnnotation from "./pages/mapPage/MapPage";
+import MapPage from "./pages/mapPage/MapPage";
 
 function App() {
   return (
@@ -26,7 +24,14 @@ function App() {
               </Protected>
             }
           />
-          <Route path="/map" element={<CallToActionWithAnnotation />} />
+          <Route
+            path="/map"
+            element={
+              <Protected>
+                <MapPage />
+              </Protected>
+            }
+          />
         </Routes>
       </AuthContextProvider>
     </div>

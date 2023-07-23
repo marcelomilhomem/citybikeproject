@@ -3,15 +3,15 @@ import {
   Heading,
   Container,
   Text,
-  Button,
   Stack,
   Icon,
   useColorModeValue,
   createIcon,
 } from "@chakra-ui/react";
 import Map from "../../components/googleMap/googleMap";
+import Modal from "../../components/modal/Modal";
 
-export default function CallToActionWithAnnotation() {
+export default function MapPage() {
   return (
     <>
       <Container maxW={"3xl"}>
@@ -26,14 +26,17 @@ export default function CallToActionWithAnnotation() {
             fontSize={{ base: "2xl", sm: "4xl", md: "6xl" }}
             lineHeight={"110%"}
           >
-            Welcome to <br />
             <Text as={"span"} color={"green.400"}>
               City Bike App
             </Text>
           </Heading>
           <Text color={"gray.500"}>
-            You can check all the bike networks that exist, and by clicking on
-            the marker you can see the stations in each network. Enjoy
+            An application that enables users to explore bike networks and
+            stations across the globe, revealing their real-time availability.
+            The primary emphasis was on managing API requests and retrieving
+            dynamic information. Moreover, a standout characteristic is the
+            app's bilingual website, facilitating seamless interaction for users
+            of diverse linguistic backgrounds.
           </Text>
           <Stack
             direction={"column"}
@@ -42,17 +45,7 @@ export default function CallToActionWithAnnotation() {
             alignSelf={"center"}
             position={"relative"}
           >
-            <Button
-              colorScheme={"green"}
-              bg={"green.400"}
-              rounded={"full"}
-              px={6}
-              _hover={{
-                bg: "green.500",
-              }}
-            >
-              Lets take a look!
-            </Button>
+            <Modal />
             <Box>
               <Icon
                 as={Arrow}
@@ -70,7 +63,7 @@ export default function CallToActionWithAnnotation() {
                 top={"-15px"}
                 transform={"rotate(10deg)"}
               >
-                Check my portifolio
+                Check Tips
               </Text>
             </Box>
           </Stack>

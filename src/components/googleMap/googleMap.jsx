@@ -24,15 +24,18 @@ function Map() {
   const [showStations, setShowStations] = useState();
   const [center, setCenter] = useState({ lat: 38.699708, lng: -9.439973 });
   const [networkId, setNetworkId] = useState();
-  const [networkName, setNetworkName] = useState()
+  const [networkCity, setNetworkCity] = useState();
 
-  const handleActiveMarker = (markerId, latitude, longitude, name) => {
+  const handleActiveMarker = (markerId, latitude, longitude, city) => {
     if (markerId === activeMarkerId) {
       return;
     }
     setActiveMarkerId(markerId);
     setCenter({ lat: latitude, lng: longitude });
-    setNetworkName(name)
+
+    if (!networkCity) {
+      setNetworkCity(city);
+    }
   };
 
   useEffect(() => {
@@ -67,7 +70,7 @@ function Map() {
       <Stack spacing={10}>
         <Stack>
           <Fragment>
-            {console.log(stations)}
+            {console.log(networks)}
             {isLoaded ? (
               <GoogleMap
                 center={center}
@@ -94,7 +97,7 @@ function Map() {
                               network.id,
                               network.location.latitude,
                               network.location.longitude,
-                              network.name
+                              network.location.city,
                             )
                           }
                           clusterer={clusterer}
@@ -150,7 +153,11 @@ function Map() {
                             >
                               <Stack>
                                 <Heading size={"md"} color={"black"}>
-                                  <Table adress={station.name} freeBikes={station.free_bikes} />
+                                  <Table
+                                    adress={station.name}
+                                    freeBikes={station.free_bikes}
+                                    city={networkCity}
+                                  />
                                 </Heading>
                               </Stack>
                             </InfoWindowF>
@@ -177,10 +184,10 @@ function Map() {
                 setShowNetworks(true);
                 setNetworkId(null);
                 setActiveMarkerId(null);
-                setNetworkName('')
+                setNetworkCity("");
               }}
             >
-              Networks
+              Back to Networks
             </Button>
           )}
         </Stack>
