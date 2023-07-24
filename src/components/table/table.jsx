@@ -6,23 +6,24 @@ import {
   Tr,
   Td,
 } from "@chakra-ui/react";
+import { withNamespaces } from "react-i18next";
 
-const Table = ({ adress, freeBikes, city }) => {
+const Table = ({ address, freeBikes, city, t }) => {
   return (
     <TableContainer>
       <ChakraTable variant="simple">
         <Tbody>
           <Tr>
-            <Td>City</Td>
+            <Td>{t("city")}</Td>
             <Td fontWeight={"100"}>{city}</Td>
           </Tr>
           <Tr>
-            <Td>Free Bikes</Td>
+            <Td>{t("freeBikes")}</Td>
             <Td fontWeight={"100"}>{freeBikes}</Td>
           </Tr>
           <Tr>
-            <Td>Adress</Td>
-            <Td fontWeight={"100"}>{adress}</Td>
+            <Td>{t("address")}</Td>
+            <Td fontWeight={"100"}>{address}</Td>
           </Tr>
         </Tbody>
       </ChakraTable>
@@ -30,4 +31,4 @@ const Table = ({ adress, freeBikes, city }) => {
   );
 };
 
-export default Table;
+export default withNamespaces()(Table);

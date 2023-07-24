@@ -1,0 +1,23 @@
+{
+  "HeyThere": "Olá",
+  "landingPageIntro": "Agradeço por dedicar um tempo para analisar meu aplicativo e considerar meu trabalho para sua avaliação. Estou animado em apresentar um dos meus projetos que acredito representar bem minhas habilidades e paixão pelo Chakra UI, React e JavaScript.",
+  "mapPageIntro": "Uma aplicação que permite aos usuários explorar redes de bicicletas e estações em todo o mundo, mostrando sua disponibilidade em tempo real. O foco principal foi gerenciar solicitações de API e obter informações dinâmicas",
+  "checkTips": "Dicas",
+  "tipsTitle": "Descubra o mundo das bicicletas urbanas com nosso aplicativo fácil de usar! É tão simples quanto 1-2-3:",
+  "tips1": "Explore o Mapa: Nosso mapa possui três camadas. A primeira revela a extensa rede de bicicletas da cidade, permitindo que você veja todas as estações de bicicletas disponíveis.",
+  "tips2": "Mergulhe Mais Profundo: Com apenas um clique em qualquer marcador, você pode acessar rapidamente as estações da rede de bicicletas naquela área.",
+  "tips3": "Detalhes da Estação: Para uma visão mais detalhada, clique em uma estação específica e pronto! Todos os detalhes essenciais sobre aquela estação estarão ao seu alcance.",
+  "closeButton": "Fechar",
+  "logout": "Sair",
+  "map": "Mapa",
+  "checkStations": "Ver Estações",
+  "backToNetworks": "Voltar para as Networks",
+  "city": "Cidade",
+  "address": "Endereço",
+  "freeBikes": "Bicicletas disponíveis",
+  "welcome": "Bem vindo a minha App City Bike",
+  "loginWithGoogle": "Use a sua Conta Google ou Github para conhecer melhor a App",
+  "loginGoogle": "Use sua Conta do Google",
+  "loginGithub": "Use sua Conta do Github",
+  "cityBikeMap": "Mapa City Bike"
+}

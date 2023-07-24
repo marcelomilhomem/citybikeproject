@@ -1,6 +1,6 @@
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { createContext, useContext, useEffect } from "react";
-import { auth, googleProvider } from "../firebase";
+import { auth, githubProvider, googleProvider } from "../firebase";
 import { signInWithPopup } from "firebase/auth";
 
 import { useState } from "react";
@@ -16,6 +16,14 @@ export const AuthContextProvider = ({ children }) => {
   const signInWithGoogle = async () => {
     try {
       await signInWithPopup(auth, googleProvider);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const signInWithGithub = async () => {
+    try {
+      await signInWithPopup(auth, githubProvider);
     } catch (error) {
       console.log(error);
     }
@@ -39,7 +47,7 @@ export const AuthContextProvider = ({ children }) => {
   });
 
   return (
-    <AuthContext.Provider value={{ signInWithGoogle, logout, currentUser }}>
+    <AuthContext.Provider value={{ signInWithGithub, signInWithGoogle, logout, currentUser }}>
       {!loading && children}
     </AuthContext.Provider>
   );

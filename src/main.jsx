@@ -5,6 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 import { ChakraProvider } from "@chakra-ui/react";
 import App from "./App";
 import { CityBikeTheme } from "./theme";
+import "./i18n";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

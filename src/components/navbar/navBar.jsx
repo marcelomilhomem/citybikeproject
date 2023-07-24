@@ -12,15 +12,21 @@ import {
   IconButton,
   Tooltip,
   Button,
+  Link,
 } from "@chakra-ui/react";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { UserAuth } from "../../context/AuthContext";
 import { AiOutlineGithub, AiFillLinkedin } from "react-icons/ai";
 import { motion } from "framer-motion";
 import { FaFilePdf } from "react-icons/fa";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import LanguageContext from "../../context/LanguageContext";
+import { withNamespaces } from "react-i18next";
 
-export default function Nav() {
+function Nav({ t }) {
+  const { language, changeLanguage } = useContext(LanguageContext);
+
   const { colorMode, toggleColorMode } = useColorMode();
   const { currentUser, logout } = UserAuth();
 
@@ -40,6 +46,14 @@ export default function Nav() {
 
   const handleNaviteMapPage = () => {
     navigate("/map");
+  };
+
+  const handleSwitch = () => {
+    if (language === "en") {
+      changeLanguage("pt");
+    } else if (language === "pt") {
+      changeLanguage("en");
+    }
   };
 
   return (
@@ -65,10 +79,17 @@ export default function Nav() {
         </motion.div>
       </Tooltip>
       <Tooltip hasArrow label="Linkedin" aria-label="linkedin">
-        <IconButton icon={<AiFillLinkedin />} />
+        <a
+          href="https://www.linkedin.com/in/marcelo-milhomem-79696422b/"
+          target="_blank"
+        >
+          <IconButton icon={<AiFillLinkedin />} />
+        </a>
       </Tooltip>
       <Tooltip hasArrow label="Github" aria-label="github">
-        <IconButton icon={<AiOutlineGithub />} />
+        <a href="https://github.com/marcelomilhomem" target="_blank">
+          <IconButton icon={<AiOutlineGithub />} />
+        </a>
       </Tooltip>
       <Tooltip
         hasArrow
@@ -83,6 +104,10 @@ export default function Nav() {
           )}
         </ChakraButton>
       </Tooltip>
+
+      <Center>
+        <Link onClick={handleSwitch}>{language === "en" ? "PT" : "EN"}</Link>
+      </Center>
       {currentUser ? (
         <Menu>
           <MenuButton
@@ -94,7 +119,7 @@ export default function Nav() {
           >
             <Avatar
               size={"sm"}
-              src={"https://avatars.dicebear.com/api/male/username.svg"}
+              src={currentUser.photoURL}
             />
           </MenuButton>
 
@@ -103,7 +128,7 @@ export default function Nav() {
             <Center>
               <Avatar
                 size={"2xl"}
-                src={"https://avatars.dicebear.com/api/male/username.svg"}
+                src={currentUser.photoURL}
               />
             </Center>
 
@@ -114,11 +139,13 @@ export default function Nav() {
             <br />
             <MenuDivider />
             <MenuItem onClick={handleNaviteHomePage}>Home</MenuItem>
-            <MenuItem onClick={handleNaviteMapPage}>Map</MenuItem>
-            <MenuItem onClick={handleLogOut}>Logout</MenuItem>
+            <MenuItem onClick={handleNaviteMapPage}>{t("map")}</MenuItem>
+            <MenuItem onClick={handleLogOut}>{t("logout")}</MenuItem>
           </MenuList>
         </Menu>
       ) : null}
     </Stack>
   );
 }
+
+export default withNamespaces()(Nav);

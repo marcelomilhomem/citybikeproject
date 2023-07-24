@@ -10,8 +10,9 @@ import {
 } from "@chakra-ui/react";
 import Map from "../../components/googleMap/googleMap";
 import Modal from "../../components/modal/Modal";
+import { withNamespaces } from "react-i18next";
 
-export default function MapPage() {
+function MapPage({ t }) {
   return (
     <>
       <Container maxW={"3xl"}>
@@ -30,14 +31,7 @@ export default function MapPage() {
               City Bike App
             </Text>
           </Heading>
-          <Text color={"gray.500"}>
-            An application that enables users to explore bike networks and
-            stations across the globe, revealing their real-time availability.
-            The primary emphasis was on managing API requests and retrieving
-            dynamic information. Moreover, a standout characteristic is the
-            app's bilingual website, facilitating seamless interaction for users
-            of diverse linguistic backgrounds.
-          </Text>
+          <Text color={"gray.500"}>{t("mapPageIntro")}</Text>
           <Stack
             direction={"column"}
             spacing={3}
@@ -63,7 +57,7 @@ export default function MapPage() {
                 top={"-15px"}
                 transform={"rotate(10deg)"}
               >
-                Check Tips
+                {t("checkTips")}
               </Text>
             </Box>
           </Stack>
@@ -86,3 +80,5 @@ const Arrow = createIcon({
     />
   ),
 });
+
+export default withNamespaces()(MapPage);

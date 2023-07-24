@@ -1,0 +1,23 @@
+{
+  "HeyThere": "Hey there,",
+  "landingPageIntro": "Thank you for taking the time to review my city bike app and considering my work for your consideration. I am excited to showcase one of my projects that I believe best represents my skills and passion for Chakra Ui, React and JS.",
+  "mapPageIntro": "An application that enables users to explore bike networks and stations across the globe, revealing their real-time availability. The primary emphasis was on managing API requests and retrieving dynamic information.",
+  "checkTips": "Check Tips",
+  "tipsTitle": "Discover the world of city biking with our user-friendly app! It's as easy as 1-2-3:",
+  "tips1": "Explore the Map: Our map comes with three layers. The first one reveals the city's extensive bike network, allowing you to see all the available bike stations.",
+  "tips2": "Dive Deeper: With just a click on any marker, you can quickly access the bike network stations in that area.",
+  "tips3": "Station Details: For a closer look, click on a specific station, and voilà! All the essential details about that station will be at your fingertips.",
+  "closeButton": "Close",
+  "logout": "Logout",
+  "map": "Map",
+  "checkStations": "Check Stations",
+  "backToNetworks": "Back to Networks",
+  "city": "City",
+  "address": "Address",
+  "freeBikes": "Free Bikes",
+  "welcome": "Welcome to my City Bike app",
+  "loginWithGoogle": "Login with Google or Github to enjoy all of our city bike app",
+  "loginGoogle": "Login with Google",
+  "loginGithub": "Login with Github",
+  "cityBikeMap": "City Bike Map"
+}

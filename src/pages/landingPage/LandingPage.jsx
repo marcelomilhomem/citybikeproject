@@ -10,8 +10,9 @@ import {
   Box,
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
+import { withNamespaces } from "react-i18next";
 
-function LandingPage() {
+function LandingPage({ t }) {
   const navigate = useNavigate();
 
   const handleMapNavition = () => {
@@ -41,14 +42,11 @@ function LandingPage() {
             </Text>
             <br />{" "}
             <Text color={"blue.400"} as={"span"}>
-              Hey there,
+              {t("HeyThere")}
             </Text>{" "}
           </Heading>
           <Text fontSize={{ base: "md", lg: "lg" }} color={"gray.500"}>
-            Thank you for taking the time to review my city bike app and
-            considering my work for your consideration. I am excited to showcase
-            one of my projects that I believe best represents my skills and
-            passion for Chakra Ui, React and JS.
+            {t("landingPageIntro")}
           </Text>
           <Box>
             <motion.div
@@ -66,7 +64,7 @@ function LandingPage() {
                 }}
                 onClick={handleMapNavition}
               >
-                City Bike Map
+                {t('cityBikeMap')}
               </Button>
             </motion.div>
           </Box>
@@ -85,4 +83,4 @@ function LandingPage() {
   );
 }
 
-export default LandingPage;
+export default withNamespaces()(LandingPage);

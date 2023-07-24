@@ -13,9 +13,11 @@ import {
   IconButton,
 } from "@chakra-ui/react";
 import { GoLightBulb } from "react-icons/go";
+import { GiDutchBike } from "react-icons/gi";
 import { motion } from "framer-motion";
+import { withNamespaces } from "react-i18next";
 
-export default function Modal() {
+function Modal({ t }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
@@ -43,32 +45,24 @@ export default function Modal() {
       >
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>
-            Discover the world of city biking with our user-friendly app! It's
-            as easy as 1-2-3:
-          </ModalHeader>
+          <ModalHeader>{t("tipsTitle")}</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <Stack>
               <Text>
-                1 - Explore the Map: Our map comes with three layers. The first
-                one reveals the city's extensive bike network, allowing you to
-                see all the available bike stations.
+                <GiDutchBike /> {t("tips1")}
               </Text>
               <Text>
-                2 - Dive Deeper: With just a click on any marker, you can
-                quickly access the bike network stations in that area.
+                <GiDutchBike /> {t("tips2")}
               </Text>
               <Text>
-                3 - Station Details: For a closer look, click on a specific
-                station, and voilà! All the essential details about that station
-                will be at your fingertips.
+                <GiDutchBike /> {t("tips3")}
               </Text>
             </Stack>
           </ModalBody>
           <ModalFooter>
             <Button colorScheme="blue" mr={3} onClick={onClose}>
-              Close
+              {t("closeButton")}
             </Button>
           </ModalFooter>
         </ModalContent>
@@ -76,3 +70,5 @@ export default function Modal() {
     </>
   );
 }
+
+export default withNamespaces()(Modal);

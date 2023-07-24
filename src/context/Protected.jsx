@@ -6,7 +6,7 @@ const Protected = ({ children }) => {
   const { currentUser } = UserAuth();
   if (!currentUser) {
     return <Navigate to="/" />;
-  }
+  } 
   return children;
 };
 

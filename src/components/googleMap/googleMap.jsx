@@ -7,10 +7,11 @@ import {
   MarkerClusterer,
 } from "@react-google-maps/api";
 import axios from "axios";
-import { Button, Center, Heading, Spinner, Stack } from "@chakra-ui/react";
+import { Button, Heading, Stack } from "@chakra-ui/react";
 import Table from "../table/table";
+import { withNamespaces } from "react-i18next";
 
-function Map() {
+function Map({ t }) {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAP_API_KEY,
   });
@@ -70,7 +71,6 @@ function Map() {
       <Stack spacing={10}>
         <Stack>
           <Fragment>
-            {console.log(networks)}
             {isLoaded ? (
               <GoogleMap
                 center={center}
@@ -114,7 +114,7 @@ function Map() {
                                   onClick={() => setNetworkId(network.id)}
                                   size={"sm"}
                                 >
-                                  Check {network.location.city} Stations
+                                  {t("checkStations")}
                                 </Button>
                               </Stack>
                             </InfoWindowF>
@@ -154,7 +154,7 @@ function Map() {
                               <Stack>
                                 <Heading size={"md"} color={"black"}>
                                   <Table
-                                    adress={station.name}
+                                    address={station.name}
                                     freeBikes={station.free_bikes}
                                     city={networkCity}
                                   />
@@ -187,7 +187,7 @@ function Map() {
                 setNetworkCity("");
               }}
             >
-              Back to Networks
+              {t("backToNetworks")}
             </Button>
           )}
         </Stack>
@@ -196,4 +196,4 @@ function Map() {
   );
 }
 
-export default Map;
+export default withNamespaces()(Map);
