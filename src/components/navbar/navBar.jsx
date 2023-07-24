@@ -58,7 +58,7 @@ function Nav({ t }) {
 
   return (
     <Stack spacing={"20px"} direction={"row"} mb={2}>
-      <Tooltip hasArrow label="Download Cv" aria-label="cv">
+      <Tooltip hasArrow label="Check Cv" aria-label="cv">
         <motion.div
           className="box"
           animate={{
@@ -73,7 +73,7 @@ function Nav({ t }) {
             repeatDelay: 1,
           }}
         >
-          <a download href={"MarceloMilhomem.pdf"}>
+          <a target="_blank" href={"https://drive.google.com/file/d/1DhFIahqyqedeZIQZeXSG_Jp4E4qLG9i5/view"}>
             <IconButton icon={<FaFilePdf />} />
           </a>
         </motion.div>
