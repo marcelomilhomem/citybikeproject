@@ -5,12 +5,11 @@ import {
   Heading,
   Text,
   Center,
-  Image,
   useColorMode,
 } from "@chakra-ui/react";
 import { UserAuth } from "../../context/AuthContext";
 import { FcGoogle } from "react-icons/fc";
-import { FaGithub } from 'react-icons/fa'
+import { FaGithub } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { withNamespaces } from "react-i18next";
 
@@ -19,7 +18,6 @@ function Login({ t }) {
   const navigate = useNavigate();
 
   const { colorMode } = useColorMode();
-
 
   const handleGoogleSignIn = async () => {
     try {
@@ -41,7 +39,14 @@ function Login({ t }) {
 
   return (
     <Stack mt={2} minH={"80vh"} direction={{ base: "column", md: "row" }}>
-      <Flex borderRadius={5} p={8} flex={1} align={"center"} justify={"center"} bgColor={colorMode === 'dark' ? 'gray.700' : 'gray.100'}>
+      <Flex
+        borderRadius={5}
+        p={8}
+        flex={1}
+        align={"center"}
+        justify={"center"}
+        bgColor={colorMode === "dark" ? "gray.700" : "gray.100"}
+      >
         <Stack spacing={4} w={"full"} maxW={"md"}>
           <Heading fontSize={"6xl"}>{t("welcome")}</Heading>
           <Text fontSize={"2xl"}>{t("loginWithGoogle")} ✌️</Text>
@@ -71,7 +76,7 @@ function Login({ t }) {
             <Button
               w={"full"}
               variant={"outline"}
-              leftIcon={<FaGithub color="black"/>}
+              leftIcon={<FaGithub color="black" />}
               loadingText="Submitting"
               size="md"
               bg={"gray.200"}

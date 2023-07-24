@@ -117,19 +117,13 @@ function Nav({ t }) {
             cursor={"pointer"}
             minW={0}
           >
-            <Avatar
-              size={"sm"}
-              src={currentUser.photoURL}
-            />
+            <Avatar size={"sm"} src={currentUser.photoURL} />
           </MenuButton>
 
           <MenuList alignItems={"center"}>
             <br />
             <Center>
-              <Avatar
-                size={"2xl"}
-                src={currentUser.photoURL}
-              />
+              <Avatar size={"2xl"} src={currentUser.photoURL} />
             </Center>
 
             <br />

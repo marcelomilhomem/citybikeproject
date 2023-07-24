@@ -47,7 +47,9 @@ export const AuthContextProvider = ({ children }) => {
   });
 
   return (
-    <AuthContext.Provider value={{ signInWithGithub, signInWithGoogle, logout, currentUser }}>
+    <AuthContext.Provider
+      value={{ signInWithGithub, signInWithGoogle, logout, currentUser }}
+    >
       {!loading && children}
     </AuthContext.Provider>
   );

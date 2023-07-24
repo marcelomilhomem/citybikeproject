@@ -64,7 +64,7 @@ function LandingPage({ t }) {
                 }}
                 onClick={handleMapNavition}
               >
-                {t('cityBikeMap')}
+                {t("cityBikeMap")}
               </Button>
             </motion.div>
           </Box>
