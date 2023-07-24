@@ -73,7 +73,7 @@ function Nav({ t }) {
             repeatDelay: 1,
           }}
         >
-          <a target="_blank" href={"https://drive.google.com/file/d/1DhFIahqyqedeZIQZeXSG_Jp4E4qLG9i5/view"}>
+          <a target="_blank"  href={"https://drive.google.com/file/d/1DhFIahqyqedeZIQZeXSG_Jp4E4qLG9i5/view"}>
             <IconButton icon={<FaFilePdf />} />
           </a>
         </motion.div>
