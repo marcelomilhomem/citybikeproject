@@ -4,7 +4,6 @@ import {
   Button,
   Heading,
   Text,
-  Center,
   useColorMode,
 } from "@chakra-ui/react";
 import { UserAuth } from "../../context/AuthContext";
@@ -37,10 +36,10 @@ function Login({ t }) {
   };
 
   useEffect(() => {
-    if(currentUser !== null) {
-      navigate('/landing-page')
+    if (currentUser !== null) {
+      navigate("/landing-page");
     }
-  }, [currentUser])
+  }, [currentUser]);
 
   return (
     <Stack mt={2} minH={"80vh"} direction={{ base: "column", md: "row" }}>
@@ -62,39 +61,30 @@ function Login({ t }) {
               justify={"space-between"}
             ></Stack>
             <Button
-              w={"full"}
-              variant={"outline"}
               leftIcon={<FcGoogle />}
-              loadingText="Submitting"
-              size="md"
-              bg={"gray.200"}
-              color={"white"}
+              colorScheme={"green"}
+              bg={"green.400"}
+              rounded={"full"}
+              px={6}
               _hover={{
-                bg: "blue.300",
+                bg: "green.500",
               }}
               onClick={handleGoogleSignIn}
             >
-              <Center>
-                <Text color={"black"}>{t("loginGoogle")}</Text>
-              </Center>
+              {t("loginGoogle")}
             </Button>
             <Button
-              w={"full"}
-              variant={"outline"}
               leftIcon={<FaGithub color="black" />}
-              loadingText="Submitting"
-              size="md"
-              bg={"gray.200"}
-              color={"white"}
+              colorScheme={"green"}
+              bg={"green.400"}
+              rounded={"full"}
+              px={6}
               _hover={{
-                bg: "blue.300",
+                bg: "green.500",
               }}
               onClick={handleGithubSignIn}
             >
-              {" "}
-              <Center>
-                <Text color={"black"}>{t("loginGithub")}</Text>
-              </Center>
+              {t("loginGithub")}
             </Button>
           </Stack>
         </Stack>
