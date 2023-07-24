@@ -12,9 +12,10 @@ import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { withNamespaces } from "react-i18next";
+import { useEffect } from "react";
 
 function Login({ t }) {
-  const { signInWithGoogle, signInWithGithub } = UserAuth();
+  const { signInWithGoogle, signInWithGithub, currentUser } = UserAuth();
   const navigate = useNavigate();
 
   const { colorMode } = useColorMode();
@@ -22,7 +23,6 @@ function Login({ t }) {
   const handleGoogleSignIn = async () => {
     try {
       await signInWithGoogle();
-      navigate("/landing-page");
     } catch (error) {
       console.log(error);
     }
@@ -31,11 +31,16 @@ function Login({ t }) {
   const handleGithubSignIn = async () => {
     try {
       await signInWithGithub();
-      navigate("/landing-page");
     } catch (error) {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    if(currentUser !== null) {
+      navigate('/landing-page')
+    }
+  }, [currentUser])
 
   return (
     <Stack mt={2} minH={"80vh"} direction={{ base: "column", md: "row" }}>

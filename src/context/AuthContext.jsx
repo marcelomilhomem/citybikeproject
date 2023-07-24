@@ -1,7 +1,7 @@
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { createContext, useContext, useEffect } from "react";
 import { auth, githubProvider, googleProvider } from "../firebase";
-import { signInWithPopup } from "firebase/auth";
+import { signInWithRedirect } from "firebase/auth";
 
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -15,7 +15,7 @@ export const AuthContextProvider = ({ children }) => {
 
   const signInWithGoogle = async () => {
     try {
-      await signInWithPopup(auth, googleProvider);
+      await signInWithRedirect(auth, googleProvider);
     } catch (error) {
       console.log(error);
     }
@@ -23,7 +23,7 @@ export const AuthContextProvider = ({ children }) => {
 
   const signInWithGithub = async () => {
     try {
-      await signInWithPopup(auth, githubProvider);
+      await signInWithRedirect(auth, githubProvider);
     } catch (error) {
       console.log(error);
     }
