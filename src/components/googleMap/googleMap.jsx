@@ -74,7 +74,7 @@ function Map({ t }) {
             {isLoaded ? (
               <GoogleMap
                 center={center}
-                zoom={10}
+                zoom={6}
                 onClick={() => setActiveMarkerId(null)}
                 mapContainerStyle={{ width: "100%", height: "70vh" }}
               >
