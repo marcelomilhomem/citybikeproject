@@ -31,7 +31,7 @@ function MapPage({ t }) {
               City Bike App
             </Text>
           </Heading>
-          <Text color={"gray.500"}>{t("mapPageIntro")}</Text>
+          <Text textAlign={"left"} color={"gray.500"}>{t("mapPageIntro")}</Text>
           <Stack
             direction={"column"}
             spacing={3}

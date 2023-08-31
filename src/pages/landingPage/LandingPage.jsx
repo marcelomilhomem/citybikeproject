@@ -45,7 +45,7 @@ function LandingPage({ t }) {
               {t("HeyThere")}
             </Text>{" "}
           </Heading>
-          <Text fontSize={{ base: "md", lg: "lg" }} color={"gray.500"}>
+          <Text textAlign={"left"} fontSize={{ base: "md", lg: "lg" }} color={"gray.500"}>
             {t("landingPageIntro")}
           </Text>
           <Box>

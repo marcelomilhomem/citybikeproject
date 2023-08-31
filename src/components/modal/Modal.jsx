@@ -11,9 +11,12 @@ import {
   useDisclosure,
   ModalHeader,
   IconButton,
+  Heading,
 } from "@chakra-ui/react";
 import { GoLightBulb } from "react-icons/go";
-import { GiDutchBike } from "react-icons/gi";
+import { FaMapMarkedAlt } from "react-icons/fa";
+import { SiGooglemaps } from "react-icons/si";
+import { MdOutlinePedalBike } from "react-icons/md";
 import { motion } from "framer-motion";
 import { withNamespaces } from "react-i18next";
 
@@ -27,7 +30,7 @@ function Modal({ t }) {
         transition={{ type: "spring", stiffness: 400, damping: 10 }}
       >
         <IconButton
-          icon={<GoLightBulb color="white" />}
+          icon={<GoLightBulb color="black" />}
           colorScheme={"green"}
           bg={"green.400"}
           rounded={"full"}
@@ -49,14 +52,26 @@ function Modal({ t }) {
           <ModalCloseButton />
           <ModalBody>
             <Stack>
+              <Heading as={"h5"} size={"sm"} color={"green.400"}>
+                <FaMapMarkedAlt />
+              </Heading>
               <Text>
-                <GiDutchBike /> {t("tips1")}
+                <Text fontWeight={"bold"}> {t("tip1title")}</Text>
+                {t("tips1")}
               </Text>
+              <Heading as={"h5"} size={"sm"} color={"green.400"}>
+                <SiGooglemaps />
+              </Heading>
               <Text>
-                <GiDutchBike /> {t("tips2")}
+                <Text fontWeight={"bold"}> {t("tip2title")}</Text>
+                {t("tips2")}
               </Text>
+              <Heading as={"h5"} size={"sm"} color={"green.400"}>
+                <MdOutlinePedalBike />
+              </Heading>
               <Text>
-                <GiDutchBike /> {t("tips3")}
+                <Text fontWeight={"bold"}> {t("tip3title")}</Text>
+                {t("tips3")}
               </Text>
             </Stack>
           </ModalBody>

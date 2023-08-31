@@ -93,7 +93,7 @@ function Nav({ t }) {
       </Tooltip>
       <Tooltip
         hasArrow
-        label={colorMode === "light" ? "DarkMode" : "LightMode"}
+        label={colorMode === "light" ? "Dark Mode" : "Light Mode"}
         aria-label="cv"
       >
         <ChakraButton onClick={toggleColorMode}>
