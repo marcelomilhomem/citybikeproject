@@ -19,5 +19,6 @@
   "loginWithGoogle": "Use a sua Conta Google ou Github para conhecer melhor a App",
   "loginGoogle": "Use sua Conta do Google",
   "loginGithub": "Use sua Conta do Github",
-  "cityBikeMap": "Mapa City Bike"
+  "cityBikeMap": "Mapa City Bike",
+  "loginAsGuest": "Login como Convidado"
 }

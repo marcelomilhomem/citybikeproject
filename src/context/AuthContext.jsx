@@ -1,7 +1,7 @@
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { createContext, useContext, useEffect } from "react";
 import { auth, githubProvider, googleProvider } from "../firebase";
-import { signInWithPopup } from "firebase/auth";
+import { signInWithPopup, signInAnonymously } from "firebase/auth";
 
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -29,6 +29,14 @@ export const AuthContextProvider = ({ children }) => {
     }
   };
 
+  const signInAnony = async () => {
+    try {
+      await signInAnonymously(auth)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   const navigate = useNavigate();
 
   const logout = () => {
@@ -48,7 +56,7 @@ export const AuthContextProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ signInWithGithub, signInWithGoogle, logout, currentUser }}
+      value={{ signInWithGithub, signInWithGoogle, logout, currentUser, signInAnony }}
     >
       {!loading && children}
     </AuthContext.Provider>

@@ -8,13 +8,14 @@ import {
 } from "@chakra-ui/react";
 import { UserAuth } from "../../context/AuthContext";
 import { FcGoogle } from "react-icons/fc";
+import { GiGhost } from "react-icons/gi";
 import { FaGithub } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { withNamespaces } from "react-i18next";
 import { useEffect } from "react";
 
 function Login({ t }) {
-  const { signInWithGoogle, signInWithGithub, currentUser } = UserAuth();
+  const { signInWithGoogle, signInWithGithub, currentUser, signInAnony } = UserAuth();
   const navigate = useNavigate();
 
   const { colorMode } = useColorMode();
@@ -30,6 +31,14 @@ function Login({ t }) {
   const handleGithubSignIn = async () => {
     try {
       await signInWithGithub();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleAnonySignIn = async () => {
+    try {
+      await signInAnony();
     } catch (error) {
       console.log(error);
     }
@@ -54,7 +63,7 @@ function Login({ t }) {
         <Stack spacing={4} w={"full"} maxW={"md"}>
           <Heading fontSize={"6xl"}>{t("welcome")}</Heading>
           <Text fontSize={"2xl"}>{t("loginWithGoogle")} ✌️</Text>
-          <Stack spacing={6}>
+          <Stack spacing={2}>
             <Stack
               direction={{ base: "column", sm: "row" }}
               align={"start"}
@@ -85,6 +94,19 @@ function Login({ t }) {
               onClick={handleGithubSignIn}
             >
               {t("loginGithub")}
+            </Button>
+            <Button
+              leftIcon={<GiGhost color="black" />}
+              colorScheme={"green"}
+              bg={"green.400"}
+              rounded={"full"}
+              px={6}
+              _hover={{
+                bg: "green.500",
+              }}
+              onClick={handleAnonySignIn}
+            >
+              {t("loginAsGuest")}
             </Button>
           </Stack>
         </Stack>
