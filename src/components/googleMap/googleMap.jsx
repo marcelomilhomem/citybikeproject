@@ -32,7 +32,7 @@ function Map({ t }) {
   const [activeMarkerId, setActiveMarkerId] = useState();
   const [networks, setNetworks] = useState();
   const [stations, setStations] = useState();
-  const [stationsLength, setStationsLength] = useState();
+  const [stationsLength, setStationsLength] = useState(0);
   const [showNetworks, setShowNetworks] = useState();
   const [showStations, setShowStations] = useState();
   const [center, setCenter] = useState({ lat: 38.699708, lng: -9.439973 });
@@ -73,7 +73,6 @@ function Map({ t }) {
         setShowStations(true);
         setStations(stationData);
         setStationsLength(response.data.network.stations.length);
-        console.log(networkCity);
       };
 
       fetchStation();
@@ -97,7 +96,7 @@ function Map({ t }) {
                 {networkCity}
               </Text>
             </Box>
-            {stationsLength ? (
+            {stationsLength !== 0 ? (
               <Box>
                 <Heading size="xs" textTransform="uppercase">
                   Stations Here:
@@ -115,6 +114,26 @@ function Map({ t }) {
                 See a detailed analysis of all your business clients.
               </Text>
             </Box>
+            {showStations && (
+              <Button
+                colorScheme={"green"}
+                variant="ghost"
+                px={6}
+                _hover={{
+                  color: "white",
+                }}
+                onClick={() => {
+                  setShowStations(false);
+                  setShowNetworks(true);
+                  setNetworkId(null);
+                  setActiveMarkerId(null);
+                  setNetworkCity("");
+                  setStationsLength(0);
+                }}
+              >
+                {t("backToNetworks")}
+              </Button>
+            )}
           </Stack>
         </CardBody>
       </Card>
@@ -222,26 +241,6 @@ function Map({ t }) {
               </GoogleMap>
             ) : null}
           </Fragment>
-          {showStations && (
-            <Button
-              colorScheme={"green"}
-              variant="ghost"
-              px={6}
-              _hover={{
-                color: "white",
-              }}
-              onClick={() => {
-                setShowStations(false);
-                setShowNetworks(true);
-                setNetworkId(null);
-                setActiveMarkerId(null);
-                setNetworkCity("");
-                setStationsLength(null);
-              }}
-            >
-              {t("backToNetworks")}
-            </Button>
-          )}
         </Stack>
       </Stack>
     </SimpleGrid>
