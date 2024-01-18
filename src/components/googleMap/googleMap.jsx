@@ -7,7 +7,18 @@ import {
   MarkerClusterer,
 } from "@react-google-maps/api";
 import axios from "axios";
-import { Button, Heading, Stack } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Card,
+  CardBody,
+  CardHeader,
+  Heading,
+  SimpleGrid,
+  Stack,
+  StackDivider,
+  Text,
+} from "@chakra-ui/react";
 import Table from "../table/table";
 import { withNamespaces } from "react-i18next";
 
@@ -21,6 +32,7 @@ function Map({ t }) {
   const [activeMarkerId, setActiveMarkerId] = useState();
   const [networks, setNetworks] = useState();
   const [stations, setStations] = useState();
+  const [stationsLength, setStationsLength] = useState();
   const [showNetworks, setShowNetworks] = useState();
   const [showStations, setShowStations] = useState();
   const [center, setCenter] = useState({ lat: 38.699708, lng: -9.439973 });
@@ -60,6 +72,8 @@ function Map({ t }) {
         setShowNetworks(false);
         setShowStations(true);
         setStations(stationData);
+        setStationsLength(response.data.network.stations.length);
+        console.log(networkCity);
       };
 
       fetchStation();
@@ -67,7 +81,43 @@ function Map({ t }) {
   }, [networkId]);
 
   return (
-    <>
+    <SimpleGrid templateColumns="1fr 3fr">
+      <Card>
+        <CardHeader>
+          <Heading size="md">Where are you?</Heading>
+        </CardHeader>
+
+        <CardBody>
+          <Stack divider={<StackDivider />} spacing="4">
+            <Box>
+              <Heading size="xs" textTransform="uppercase">
+                Location
+              </Heading>
+              <Text pt="2" fontSize="sm">
+                {networkCity}
+              </Text>
+            </Box>
+            {stationsLength ? (
+              <Box>
+                <Heading size="xs" textTransform="uppercase">
+                  Stations Here:
+                </Heading>
+                <Text pt="2" fontSize="sm">
+                  {stationsLength}
+                </Text>
+              </Box>
+            ) : null}
+            <Box>
+              <Heading size="xs" textTransform="uppercase">
+                Analysis
+              </Heading>
+              <Text pt="2" fontSize="sm">
+                See a detailed analysis of all your business clients.
+              </Text>
+            </Box>
+          </Stack>
+        </CardBody>
+      </Card>
       <Stack spacing={10}>
         <Stack>
           <Fragment>
@@ -97,14 +147,16 @@ function Map({ t }) {
                               network.id,
                               network.location.latitude,
                               network.location.longitude,
-                              network.location.city,
+                              network.location.city
                             )
                           }
                           clusterer={clusterer}
                         >
                           {activeMarkerId === network.id ? (
                             <InfoWindowF
-                              onCloseClick={() => setActiveMarkerId(null)}
+                              onCloseClick={() => {
+                                setActiveMarkerId(null), setNetworkCity("");
+                              }}
                             >
                               <Stack>
                                 <Heading size={"md"} color={"black"}>
@@ -142,7 +194,7 @@ function Map({ t }) {
                             handleActiveMarker(
                               station.id,
                               station.latitude,
-                              station.longitude,
+                              station.longitude
                             )
                           }
                           clusterer={clusterer}
@@ -173,11 +225,10 @@ function Map({ t }) {
           {showStations && (
             <Button
               colorScheme={"green"}
-              bg={"green.400"}
-              rounded={"full"}
+              variant="ghost"
               px={6}
               _hover={{
-                bg: "green.500",
+                color: "white",
               }}
               onClick={() => {
                 setShowStations(false);
@@ -185,6 +236,7 @@ function Map({ t }) {
                 setNetworkId(null);
                 setActiveMarkerId(null);
                 setNetworkCity("");
+                setStationsLength(null);
               }}
             >
               {t("backToNetworks")}
@@ -192,7 +244,7 @@ function Map({ t }) {
           )}
         </Stack>
       </Stack>
-    </>
+    </SimpleGrid>
   );
 }
 
