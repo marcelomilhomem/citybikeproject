@@ -13,6 +13,8 @@ import {
   Card,
   CardBody,
   CardHeader,
+  Grid,
+  GridItem,
   Heading,
   SimpleGrid,
   Stack,
@@ -21,6 +23,7 @@ import {
 } from "@chakra-ui/react";
 import Table from "../table/table";
 import { withNamespaces } from "react-i18next";
+import { FaMapMarkedAlt } from "react-icons/fa";
 
 function Map({ t }) {
   const { isLoaded } = useLoadScript({
@@ -32,6 +35,7 @@ function Map({ t }) {
   const [activeMarkerId, setActiveMarkerId] = useState();
   const [networks, setNetworks] = useState();
   const [stations, setStations] = useState();
+  const [currentStation, setCurrentStation] = useState();
   const [stationsLength, setStationsLength] = useState(0);
   const [showNetworks, setShowNetworks] = useState();
   const [showStations, setShowStations] = useState();
@@ -80,65 +84,9 @@ function Map({ t }) {
   }, [networkId]);
 
   return (
-    <SimpleGrid templateColumns="1fr 3fr">
-      <Card>
-        <CardHeader>
-          <Heading size="md">Where are you?</Heading>
-        </CardHeader>
-
-        <CardBody>
-          <Stack divider={<StackDivider />} spacing="4">
-            <Box>
-              <Heading size="xs" textTransform="uppercase">
-                Location
-              </Heading>
-              <Text pt="2" fontSize="sm">
-                {networkCity}
-              </Text>
-            </Box>
-            {stationsLength !== 0 ? (
-              <Box>
-                <Heading size="xs" textTransform="uppercase">
-                  Stations Here:
-                </Heading>
-                <Text pt="2" fontSize="sm">
-                  {stationsLength}
-                </Text>
-              </Box>
-            ) : null}
-            <Box>
-              <Heading size="xs" textTransform="uppercase">
-                Analysis
-              </Heading>
-              <Text pt="2" fontSize="sm">
-                See a detailed analysis of all your business clients.
-              </Text>
-            </Box>
-            {showStations && (
-              <Button
-                colorScheme={"green"}
-                variant="ghost"
-                px={6}
-                _hover={{
-                  color: "white",
-                }}
-                onClick={() => {
-                  setShowStations(false);
-                  setShowNetworks(true);
-                  setNetworkId(null);
-                  setActiveMarkerId(null);
-                  setNetworkCity("");
-                  setStationsLength(0);
-                }}
-              >
-                {t("backToNetworks")}
-              </Button>
-            )}
-          </Stack>
-        </CardBody>
-      </Card>
-      <Stack spacing={10}>
-        <Stack>
+    <SimpleGrid templateColumns="repeat(auto-fit, minmax(250px, 1fr))">
+      <GridItem colSpan={2}>
+        <Card>
           <Fragment>
             {isLoaded ? (
               <GoogleMap
@@ -209,18 +157,21 @@ function Map({ t }) {
                             lat: station.latitude,
                             lng: station.longitude,
                           }}
-                          onClick={() =>
+                          onClick={() => {
                             handleActiveMarker(
                               station.id,
                               station.latitude,
                               station.longitude
-                            )
-                          }
+                            ),
+                              setCurrentStation(station);
+                          }}
                           clusterer={clusterer}
                         >
                           {activeMarkerId === station.id ? (
                             <InfoWindowF
-                              onCloseClick={() => setActiveMarkerId(null)}
+                              onCloseClick={() => {
+                                setActiveMarkerId(null), setCurrentStation("");
+                              }}
                             >
                               <Stack>
                                 <Heading size={"md"} color={"black"}>
@@ -241,8 +192,84 @@ function Map({ t }) {
               </GoogleMap>
             ) : null}
           </Fragment>
-        </Stack>
-      </Stack>
+        </Card>
+      </GridItem>
+      <GridItem>
+        <Card>
+          <CardHeader>
+            <Heading size="md">Where are you?</Heading>
+          </CardHeader>
+
+          <CardBody>
+            <Stack divider={<StackDivider />} spacing="4">
+              <Box>
+                <Heading size="xs" textTransform="uppercase">
+                  Location
+                </Heading>
+                <Text pt="2" fontSize="sm">
+                  {networkCity}
+                </Text>
+              </Box>
+              {stationsLength !== 0 ? (
+                <Box>
+                  <Heading size="xs" textTransform="uppercase">
+                    Stations Here:
+                  </Heading>
+                  <Text pt="2" fontSize="sm">
+                    {stationsLength}
+                  </Text>
+                </Box>
+              ) : null}
+              {currentStation !== "" ? (
+                <Box>
+                  <Heading size="xs" textTransform="uppercase">
+                    Current Station
+                  </Heading>
+                  <Text pt="2" fontSize="sm">
+                    {currentStation}
+                  </Text>
+                </Box>
+              ) : null}
+              <Box>
+                <Heading size="xs" textTransform="uppercase">
+                  Analysis
+                </Heading>
+                <Text pt="2" fontSize="sm">
+                  See a detailed analysis of all your business clients.
+                </Text>
+              </Box>
+              <Box>
+                <Heading size="xs" textTransform="uppercase">
+                  Analysis
+                </Heading>
+                <Text pt="2" fontSize="sm">
+                  See a detailed analysis of all your business clients.
+                </Text>
+              </Box>
+              {showStations && (
+                <Button
+                  colorScheme={"green"}
+                  variant="ghost"
+                  px={6}
+                  _hover={{
+                    color: "white",
+                  }}
+                  onClick={() => {
+                    setShowStations(false);
+                    setShowNetworks(true);
+                    setNetworkId(null);
+                    setActiveMarkerId(null);
+                    setNetworkCity("");
+                    setStationsLength(0);
+                  }}
+                >
+                  {t("backToNetworks")}
+                </Button>
+              )}
+            </Stack>
+          </CardBody>
+        </Card>
+      </GridItem>
     </SimpleGrid>
   );
 }
