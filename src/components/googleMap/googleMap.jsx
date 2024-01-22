@@ -13,6 +13,7 @@ import {
   Card,
   CardBody,
   CardHeader,
+  Collapse,
   Grid,
   GridItem,
   Heading,
@@ -20,6 +21,7 @@ import {
   Stack,
   StackDivider,
   Text,
+  useDisclosure,
 } from "@chakra-ui/react";
 import Table from "../table/table";
 import { withNamespaces } from "react-i18next";
@@ -35,15 +37,16 @@ function Map({ t }) {
   const [activeMarkerId, setActiveMarkerId] = useState();
   const [networks, setNetworks] = useState();
   const [stations, setStations] = useState();
-  const [currentStation, setCurrentStation] = useState();
+  const [currentStation, setCurrentStation] = useState("");
   const [stationsLength, setStationsLength] = useState(0);
   const [showNetworks, setShowNetworks] = useState();
   const [showStations, setShowStations] = useState();
-  const [center, setCenter] = useState({ lat: 38.699708, lng: -9.439973 });
+  const [center, setCenter] = useState();
   const [networkId, setNetworkId] = useState();
   const [networkCity, setNetworkCity] = useState();
 
   const handleActiveMarker = (markerId, latitude, longitude, city) => {
+    console.log("city", city);
     if (markerId === activeMarkerId) {
       return;
     }
@@ -64,6 +67,18 @@ function Map({ t }) {
     };
 
     fetchNetworks();
+
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        console.log(position.coords.latitude, position.coords.longitude);
+        setCenter({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        });
+      });
+    } else {
+      setCenter({ lat: 38.699708, lng: -9.439973 });
+    }
   }, []);
 
   useEffect(() => {
@@ -84,7 +99,7 @@ function Map({ t }) {
   }, [networkId]);
 
   return (
-    <SimpleGrid templateColumns="repeat(auto-fit, minmax(250px, 1fr))">
+    <SimpleGrid templateColumns="repeat(auto-fit, minmax(200px, 1fr))" gap={1}>
       <GridItem colSpan={2}>
         <Card>
           <Fragment>
@@ -132,6 +147,7 @@ function Map({ t }) {
                                 <Button
                                   onClick={() => setNetworkId(network.id)}
                                   size={"sm"}
+                                  variant={"ghost"}
                                 >
                                   {t("checkStations")}
                                 </Button>
@@ -163,7 +179,8 @@ function Map({ t }) {
                               station.latitude,
                               station.longitude
                             ),
-                              setCurrentStation(station);
+                              setCurrentStation(station),
+                              console.log(station);
                           }}
                           clusterer={clusterer}
                         >
@@ -174,13 +191,9 @@ function Map({ t }) {
                               }}
                             >
                               <Stack>
-                                <Heading size={"md"} color={"black"}>
-                                  <Table
-                                    address={station.name}
-                                    freeBikes={station.free_bikes}
-                                    city={networkCity}
-                                  />
-                                </Heading>
+                                <Text as="b" size={"sm"} color={"black"}>
+                                  Free Bikes {station.free_bikes}
+                                </Text>
                               </Stack>
                             </InfoWindowF>
                           ) : null}
@@ -192,24 +205,33 @@ function Map({ t }) {
               </GoogleMap>
             ) : null}
           </Fragment>
+          {showStations && (
+            <Button
+              bg={"yellow.300"}
+              variant="ghost"
+              px={6}
+              onClick={() => {
+                setShowStations(false);
+                setShowNetworks(true);
+                setNetworkId(null);
+                setActiveMarkerId(null);
+                setNetworkCity("");
+                setStationsLength(0);
+              }}
+            >
+              {t("backToNetworks")}
+            </Button>
+          )}
         </Card>
       </GridItem>
       <GridItem>
-        <Card>
+        <Card textAlign={"start"}>
           <CardHeader>
-            <Heading size="md">Where are you?</Heading>
+            <Heading size="md"> {networkCity}</Heading>
           </CardHeader>
 
           <CardBody>
             <Stack divider={<StackDivider />} spacing="4">
-              <Box>
-                <Heading size="xs" textTransform="uppercase">
-                  Location
-                </Heading>
-                <Text pt="2" fontSize="sm">
-                  {networkCity}
-                </Text>
-              </Box>
               {stationsLength !== 0 ? (
                 <Box>
                   <Heading size="xs" textTransform="uppercase">
@@ -220,52 +242,38 @@ function Map({ t }) {
                   </Text>
                 </Box>
               ) : null}
-              {currentStation !== "" ? (
-                <Box>
-                  <Heading size="xs" textTransform="uppercase">
-                    Current Station
-                  </Heading>
-                  <Text pt="2" fontSize="sm">
-                    {currentStation}
-                  </Text>
-                </Box>
-              ) : null}
               <Box>
                 <Heading size="xs" textTransform="uppercase">
-                  Analysis
+                  Current Station
                 </Heading>
                 <Text pt="2" fontSize="sm">
-                  See a detailed analysis of all your business clients.
+                  {currentStation !== ""
+                    ? currentStation.name
+                    : "Select Station"}
                 </Text>
               </Box>
               <Box>
                 <Heading size="xs" textTransform="uppercase">
-                  Analysis
+                  Free Bikes
                 </Heading>
                 <Text pt="2" fontSize="sm">
-                  See a detailed analysis of all your business clients.
+                  {currentStation.free_bikes}
                 </Text>
               </Box>
-              {showStations && (
-                <Button
-                  colorScheme={"green"}
-                  variant="ghost"
-                  px={6}
-                  _hover={{
-                    color: "white",
-                  }}
-                  onClick={() => {
-                    setShowStations(false);
-                    setShowNetworks(true);
-                    setNetworkId(null);
-                    setActiveMarkerId(null);
-                    setNetworkCity("");
-                    setStationsLength(0);
-                  }}
-                >
-                  {t("backToNetworks")}
-                </Button>
-              )}
+              <Box>
+                <Heading size="xs" textTransform="uppercase">
+                  Lat
+                </Heading>
+                <Text pt="2" fontSize="sm">
+                  {currentStation.latitude}
+                </Text>
+                <Heading size="xs" textTransform="uppercase">
+                  Lng
+                </Heading>
+                <Text pt="2" fontSize="sm">
+                  {currentStation.longitude}
+                </Text>
+              </Box>
             </Stack>
           </CardBody>
         </Card>

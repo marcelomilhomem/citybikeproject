@@ -13,9 +13,8 @@ import {
   IconButton,
   Heading,
 } from "@chakra-ui/react";
-import { GoLightBulb } from "react-icons/go";
 import { FaMapMarkedAlt } from "react-icons/fa";
-import { SiGooglemaps } from "react-icons/si";
+import { SiGo, SiGooglemaps } from "react-icons/si";
 import { MdOutlinePedalBike } from "react-icons/md";
 import { motion } from "framer-motion";
 import { withNamespaces } from "react-i18next";
@@ -29,16 +28,15 @@ function Modal({ t }) {
         whileHover={{ scale: 1.1 }}
         transition={{ type: "spring", stiffness: 400, damping: 10 }}
       >
-        <IconButton
-          icon={<GoLightBulb color="black" />}
-          colorScheme={"green"}
-          bg={"green.400"}
-          rounded={"full"}
-          _hover={{
-            bg: "green.500",
-          }}
+        <Button
+          alignContent={"start"}
+          bg={"yellow.300"}
+          _hover={"none"}
           onClick={onOpen}
-        />
+          rightIcon={<SiGooglemaps />}
+        >
+          {t("learnMore")}
+        </Button>
       </motion.div>
       <ChakraModal
         isCentered
@@ -52,21 +50,21 @@ function Modal({ t }) {
           <ModalCloseButton />
           <ModalBody>
             <Stack>
-              <Heading as={"h5"} size={"sm"} color={"green.400"}>
+              <Heading as={"h5"} size={"sm"} color={"yellow.300"}>
                 <FaMapMarkedAlt />
               </Heading>
               <Text>
                 <Text fontWeight={"bold"}> {t("tip1title")}</Text>
                 {t("tips1")}
               </Text>
-              <Heading as={"h5"} size={"sm"} color={"green.400"}>
+              <Heading as={"h5"} size={"sm"} color={"yellow.300"}>
                 <SiGooglemaps />
               </Heading>
               <Text>
                 <Text fontWeight={"bold"}> {t("tip2title")}</Text>
                 {t("tips2")}
               </Text>
-              <Heading as={"h5"} size={"sm"} color={"green.400"}>
+              <Heading as={"h5"} size={"sm"} color={"yellow.300"}>
                 <MdOutlinePedalBike />
               </Heading>
               <Text>

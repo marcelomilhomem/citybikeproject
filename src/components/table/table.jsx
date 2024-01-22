@@ -11,19 +11,11 @@ import { withNamespaces } from "react-i18next";
 const Table = ({ address, freeBikes, city, t }) => {
   return (
     <TableContainer>
-      <ChakraTable variant="simple">
+      <ChakraTable variant="unstyled">
         <Tbody>
-          <Tr>
-            <Td>{t("city")}</Td>
-            <Td fontWeight={"100"}>{city}</Td>
-          </Tr>
           <Tr>
             <Td>{t("freeBikes")}</Td>
             <Td fontWeight={"100"}>{freeBikes}</Td>
-          </Tr>
-          <Tr>
-            <Td>{t("address")}</Td>
-            <Td fontWeight={"100"}>{address}</Td>
           </Tr>
         </Tbody>
       </ChakraTable>

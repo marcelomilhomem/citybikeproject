@@ -5,6 +5,8 @@ import {
   Heading,
   Text,
   useColorMode,
+  Box,
+  Image,
 } from "@chakra-ui/react";
 import { UserAuth } from "../../context/AuthContext";
 import { FcGoogle } from "react-icons/fc";
@@ -15,7 +17,8 @@ import { withNamespaces } from "react-i18next";
 import { useEffect } from "react";
 
 function Login({ t }) {
-  const { signInWithGoogle, signInWithGithub, currentUser, signInAnony } = UserAuth();
+  const { signInWithGoogle, signInWithGithub, currentUser, signInAnony } =
+    UserAuth();
   const navigate = useNavigate();
 
   const { colorMode } = useColorMode();
@@ -58,11 +61,18 @@ function Login({ t }) {
         flex={1}
         align={"center"}
         justify={"center"}
-        bgColor={colorMode === "dark" ? "gray.700" : "gray.100"}
+        bgColor={"gray.100"}
       >
         <Stack spacing={4} w={"full"} maxW={"md"}>
-          <Heading fontSize={"6xl"}>{t("welcome")}</Heading>
-          <Text fontSize={"2xl"}>{t("loginWithGoogle")} ✌️</Text>
+          <Image
+            src="https://images.unsplash.com/photo-1561113500-8f4ad4f80a93?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            alt="Ilustrative Img"
+            rounded={"md"}
+            boxShadow={"xl"}
+          />
+          {/*           <Heading fontSize={"6xl"}>{t("welcome")}</Heading>
+           */}{" "}
+          <Text fontSize={"2xl"}>{t("welcome")} ✌️</Text>
           <Stack spacing={2}>
             <Stack
               direction={{ base: "column", sm: "row" }}
@@ -71,39 +81,24 @@ function Login({ t }) {
             ></Stack>
             <Button
               leftIcon={<FcGoogle />}
-              colorScheme={"green"}
-              bg={"green.400"}
-              rounded={"full"}
+              bg={"gray.200"}
               px={6}
-              _hover={{
-                bg: "green.500",
-              }}
               onClick={handleGoogleSignIn}
             >
               {t("loginGoogle")}
             </Button>
             <Button
               leftIcon={<FaGithub color="black" />}
-              colorScheme={"green"}
-              bg={"green.400"}
-              rounded={"full"}
+              bg={"gray.200"}
               px={6}
-              _hover={{
-                bg: "green.500",
-              }}
               onClick={handleGithubSignIn}
             >
               {t("loginGithub")}
             </Button>
             <Button
               leftIcon={<GiGhost color="black" />}
-              colorScheme={"green"}
-              bg={"green.400"}
-              rounded={"full"}
+              bg={"gray.200"}
               px={6}
-              _hover={{
-                bg: "green.500",
-              }}
               onClick={handleAnonySignIn}
             >
               {t("loginAsGuest")}

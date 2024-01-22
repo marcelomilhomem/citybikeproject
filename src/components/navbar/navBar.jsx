@@ -13,6 +13,7 @@ import {
   Tooltip,
   Button,
   Link,
+  Text,
 } from "@chakra-ui/react";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { UserAuth } from "../../context/AuthContext";
@@ -26,8 +27,6 @@ import { withNamespaces } from "react-i18next";
 
 function Nav({ t }) {
   const { language, changeLanguage } = useContext(LanguageContext);
-
-  const { colorMode, toggleColorMode } = useColorMode();
   const { currentUser, logout } = UserAuth();
 
   const handleLogOut = async () => {
@@ -58,53 +57,43 @@ function Nav({ t }) {
 
   return (
     <Stack spacing={"20px"} direction={"row"} mb={2}>
-      <Tooltip hasArrow label="Check Cv" aria-label="cv">
-        <motion.div
-          className="box"
-          animate={{
-            scale: [1, 2, 2, 1, 1],
-            rotate: [0, 0, 180, 180, 0],
-            borderRadius: ["0%", "0%", "50%", "50%", "0%"],
-          }}
-          transition={{
-            duration: 2,
-            ease: "easeInOut",
-            times: [0, 0.2, 0.5, 0.8, 1],
-            repeatDelay: 1,
-          }}
+      <motion.div
+        className="box"
+        animate={{
+          scale: [1, 2, 2, 1, 1],
+          rotate: [0, 0, 180, 180, 0],
+          borderRadius: ["0%", "0%", "50%", "50%", "0%"],
+        }}
+        transition={{
+          duration: 2,
+          ease: "easeInOut",
+          times: [0, 0.2, 0.5, 0.8, 1],
+          repeatDelay: 1,
+        }}
+      >
+        <a
+          target="_blank"
+          href={
+            "https://drive.google.com/file/d/1DhFIahqyqedeZIQZeXSG_Jp4E4qLG9i5/view"
+          }
         >
-          <a target="_blank"  href={"https://drive.google.com/file/d/1DhFIahqyqedeZIQZeXSG_Jp4E4qLG9i5/view"}>
-            <IconButton icon={<FaFilePdf />} />
-          </a>
-        </motion.div>
-      </Tooltip>
+          {/* <IconButton variant={"ghost"} icon={<FaFilePdf />} /> */}
+          <ChakraButton variant={"ghost"}>My CV</ChakraButton>
+        </a>
+      </motion.div>
       <Tooltip hasArrow label="Linkedin" aria-label="linkedin">
         <a
           href="https://www.linkedin.com/in/marcelo-milhomem-79696422b/"
           target="_blank"
         >
-          <IconButton icon={<AiFillLinkedin />} />
+          <IconButton variant={"ghost"} icon={<AiFillLinkedin />} />
         </a>
       </Tooltip>
       <Tooltip hasArrow label="Github" aria-label="github">
         <a href="https://github.com/marcelomilhomem" target="_blank">
-          <IconButton icon={<AiOutlineGithub />} />
+          <IconButton variant={"ghost"} icon={<AiOutlineGithub />} />
         </a>
       </Tooltip>
-      <Tooltip
-        hasArrow
-        label={colorMode === "light" ? "Dark Mode" : "Light Mode"}
-        aria-label="cv"
-      >
-        <ChakraButton onClick={toggleColorMode}>
-          {colorMode === "light" ? (
-            <MoonIcon color={"#1C2321"} />
-          ) : (
-            <SunIcon color={"#1C2321"} />
-          )}
-        </ChakraButton>
-      </Tooltip>
-
       <Center>
         <Link onClick={handleSwitch}>{language === "en" ? "PT" : "EN"}</Link>
       </Center>

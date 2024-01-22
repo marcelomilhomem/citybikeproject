@@ -22,6 +22,8 @@
   "loginWithGoogle": "Login with Google or Github to enjoy all of our city bike app",
   "loginGoogle": "Login with Google",
   "loginGithub": "Login with Github",
-  "cityBikeMap": "City Bike Map",
-  "loginAsGuest": "Continue as Guest"
+  "cityBikeMap": "Explore",
+  "loginAsGuest": "Continue as Guest",
+  "learnMore": "Learn More"
+
 }
