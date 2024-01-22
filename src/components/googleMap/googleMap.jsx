@@ -218,7 +218,6 @@ function Map({ t }) {
                                 <Button
                                   onClick={() => setNetworkId(network.id)}
                                   size={"sm"}
-                                  variant="outline"
                                   colorScheme="gray"
                                 >
                                   {t("checkStations")}

@@ -23,7 +23,10 @@ function MapPage({ t }) {
           py={{ base: 20, md: 36 }}
           maxW={"3xl"}
         >
-          <Heading fontSize={{ base: "3xl", md: "4xl", lg: "5xl" }}>
+          <Heading
+            colorScheme="gray"
+            fontSize={{ base: "3xl", md: "4xl", lg: "5xl" }}
+          >
             City Bike App
           </Heading>
           <Text textAlign={"left"} color={"gray.500"}>

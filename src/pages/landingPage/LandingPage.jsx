@@ -32,7 +32,10 @@ function LandingPage({ t }) {
         bgColor={"gray.100"}
       >
         <Stack spacing={6} w={"full"} maxW={"lg"}>
-          <Heading fontSize={{ base: "3xl", md: "4xl", lg: "5xl" }}>
+          <Heading
+            colorScheme="gray"
+            fontSize={{ base: "3xl", md: "4xl", lg: "5xl" }}
+          >
             Full Stack Developer
             <br />
           </Heading>
