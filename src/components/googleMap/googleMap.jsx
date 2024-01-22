@@ -8,6 +8,8 @@ import {
 } from "@react-google-maps/api";
 import axios from "axios";
 import {
+  Alert,
+  AlertIcon,
   Box,
   Button,
   Card,
@@ -68,14 +70,19 @@ function Map({ t }) {
 
     fetchNetworks();
 
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        console.log(position.coords.latitude, position.coords.longitude);
-        setCenter({
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-        });
-      });
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setCenter({
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          });
+        },
+        (error) => {
+          console.error("Error getting user's location:", error.message);
+          setCenter({ lat: 38.699708, lng: -9.439973 });
+        }
+      );
     } else {
       setCenter({ lat: 38.699708, lng: -9.439973 });
     }
@@ -111,7 +118,7 @@ function Map({ t }) {
               {stationsLength !== 0 ? (
                 <Box>
                   <Heading size="xs" textTransform="uppercase">
-                    Stations Here:
+                    {t("stationsHere")}
                   </Heading>
                   <Text pt="2" fontSize="sm">
                     {stationsLength}
@@ -120,17 +127,15 @@ function Map({ t }) {
               ) : null}
               <Box>
                 <Heading size="xs" textTransform="uppercase">
-                  Current Station
+                  {t("currentStation")}
                 </Heading>
                 <Text pt="2" fontSize="sm">
-                  {currentStation !== ""
-                    ? currentStation.name
-                    : "Select Station"}
+                  {currentStation !== "" ? currentStation.name : ""}
                 </Text>
               </Box>
               <Box>
                 <Heading size="xs" textTransform="uppercase">
-                  Free Bikes
+                  {t("availableBikes")}
                 </Heading>
                 <Text pt="2" fontSize="sm">
                   {currentStation.free_bikes}

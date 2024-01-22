@@ -24,5 +24,8 @@
   "loginGithub": "Use sua Conta do Github",
   "cityBikeMap": "Explorar",
   "loginAsGuest": "Login como Convidado",
-  "learnMore": "Saiba Mais"
+  "learnMore": "Saiba Mais",
+  "stationsHere": "Estações:",
+  "currentStation": "Estação Atual:",
+  "availableBikes": "Bicicletas Disponíveis:"
 }
