@@ -20,6 +20,8 @@ import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import LanguageContext from "../../context/LanguageContext";
 import { withNamespaces } from "react-i18next";
+import { PT } from "country-flag-icons/react/3x2";
+import { US } from "country-flag-icons/react/3x2";
 
 function Nav({ t }) {
   const { language, changeLanguage } = useContext(LanguageContext);
@@ -78,7 +80,21 @@ function Nav({ t }) {
         </a>
       </motion.div>
       <Center>
-        <Link onClick={handleSwitch}>{language === "en" ? "PT" : "EN"}</Link>
+        {language === "en" ? (
+          <IconButton
+            onClick={handleSwitch}
+            size={"sm"}
+            variant={"ghost"}
+            icon={<PT title="Portugal" className="..." />}
+          ></IconButton>
+        ) : (
+          <IconButton
+            onClick={handleSwitch}
+            variant={"ghost"}
+            size={"sm"}
+            icon={<US title="United States" className="..." />}
+          ></IconButton>
+        )}
       </Center>
       {currentUser ? (
         <Menu>
