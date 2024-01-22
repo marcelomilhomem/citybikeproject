@@ -100,8 +100,78 @@ function Map({ t }) {
 
   return (
     <SimpleGrid templateColumns="repeat(auto-fit, minmax(200px, 1fr))" gap={1}>
+      <GridItem>
+        <Card textAlign={"start"}>
+          <CardHeader>
+            <Heading size="md"> {networkCity}</Heading>
+          </CardHeader>
+
+          <CardBody>
+            <Stack divider={<StackDivider />} spacing="4">
+              {stationsLength !== 0 ? (
+                <Box>
+                  <Heading size="xs" textTransform="uppercase">
+                    Stations Here:
+                  </Heading>
+                  <Text pt="2" fontSize="sm">
+                    {stationsLength}
+                  </Text>
+                </Box>
+              ) : null}
+              <Box>
+                <Heading size="xs" textTransform="uppercase">
+                  Current Station
+                </Heading>
+                <Text pt="2" fontSize="sm">
+                  {currentStation !== ""
+                    ? currentStation.name
+                    : "Select Station"}
+                </Text>
+              </Box>
+              <Box>
+                <Heading size="xs" textTransform="uppercase">
+                  Free Bikes
+                </Heading>
+                <Text pt="2" fontSize="sm">
+                  {currentStation.free_bikes}
+                </Text>
+              </Box>
+              <Box>
+                <Heading size="xs" textTransform="uppercase">
+                  Lat
+                </Heading>
+                <Text pt="2" fontSize="sm">
+                  {currentStation.latitude}
+                </Text>
+                <Heading size="xs" textTransform="uppercase">
+                  Lng
+                </Heading>
+                <Text pt="2" fontSize="sm">
+                  {currentStation.longitude}
+                </Text>
+              </Box>
+            </Stack>
+          </CardBody>
+        </Card>
+      </GridItem>
       <GridItem colSpan={2}>
         <Card>
+          {showStations && (
+            <Button
+              variant="ghost"
+              px={6}
+              onClick={() => {
+                setShowStations(false);
+                setShowNetworks(true);
+                setNetworkId(null);
+                setActiveMarkerId(null);
+                setNetworkCity("");
+                setStationsLength(0);
+              }}
+            >
+              {t("backToNetworks")}
+            </Button>
+          )}
           <Fragment>
             {isLoaded ? (
               <GoogleMap
@@ -205,77 +275,6 @@ function Map({ t }) {
               </GoogleMap>
             ) : null}
           </Fragment>
-          {showStations && (
-            <Button
-              bg={"yellow.300"}
-              variant="ghost"
-              px={6}
-              onClick={() => {
-                setShowStations(false);
-                setShowNetworks(true);
-                setNetworkId(null);
-                setActiveMarkerId(null);
-                setNetworkCity("");
-                setStationsLength(0);
-              }}
-            >
-              {t("backToNetworks")}
-            </Button>
-          )}
-        </Card>
-      </GridItem>
-      <GridItem>
-        <Card textAlign={"start"}>
-          <CardHeader>
-            <Heading size="md"> {networkCity}</Heading>
-          </CardHeader>
-
-          <CardBody>
-            <Stack divider={<StackDivider />} spacing="4">
-              {stationsLength !== 0 ? (
-                <Box>
-                  <Heading size="xs" textTransform="uppercase">
-                    Stations Here:
-                  </Heading>
-                  <Text pt="2" fontSize="sm">
-                    {stationsLength}
-                  </Text>
-                </Box>
-              ) : null}
-              <Box>
-                <Heading size="xs" textTransform="uppercase">
-                  Current Station
-                </Heading>
-                <Text pt="2" fontSize="sm">
-                  {currentStation !== ""
-                    ? currentStation.name
-                    : "Select Station"}
-                </Text>
-              </Box>
-              <Box>
-                <Heading size="xs" textTransform="uppercase">
-                  Free Bikes
-                </Heading>
-                <Text pt="2" fontSize="sm">
-                  {currentStation.free_bikes}
-                </Text>
-              </Box>
-              <Box>
-                <Heading size="xs" textTransform="uppercase">
-                  Lat
-                </Heading>
-                <Text pt="2" fontSize="sm">
-                  {currentStation.latitude}
-                </Text>
-                <Heading size="xs" textTransform="uppercase">
-                  Lng
-                </Heading>
-                <Text pt="2" fontSize="sm">
-                  {currentStation.longitude}
-                </Text>
-              </Box>
-            </Stack>
-          </CardBody>
         </Card>
       </GridItem>
     </SimpleGrid>

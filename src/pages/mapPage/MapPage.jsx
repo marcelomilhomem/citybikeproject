@@ -37,25 +37,6 @@ function MapPage({ t }) {
             position={"relative"}
           >
             <Modal />
-            {/*  <Box>
-              <Icon
-                as={Arrow}
-                w={71}
-                position={"absolute"}
-                right={-71}
-                top={"10px"}
-              />
-              <Text
-                fontSize={"lg"}
-                fontFamily={"Caveat"}
-                position={"absolute"}
-                right={"-125px"}
-                top={"-15px"}
-                transform={"rotate(10deg)"}
-              >
-                {t("checkTips")}
-              </Text>
-            </Box> */}
           </Stack>
         </Stack>
       </Container>

@@ -7,19 +7,15 @@ import {
   MenuItem,
   MenuDivider,
   Stack,
-  useColorMode,
   Center,
   IconButton,
   Tooltip,
   Button,
   Link,
-  Text,
 } from "@chakra-ui/react";
-import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { UserAuth } from "../../context/AuthContext";
 import { AiOutlineGithub, AiFillLinkedin } from "react-icons/ai";
 import { motion } from "framer-motion";
-import { FaFilePdf } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import LanguageContext from "../../context/LanguageContext";
@@ -74,7 +70,7 @@ function Nav({ t }) {
         <a
           target="_blank"
           href={
-            "https://drive.google.com/file/d/1DhFIahqyqedeZIQZeXSG_Jp4E4qLG9i5/view"
+            "https://drive.google.com/file/d/19-1fnMfMTwaYvmU9Mkc3smgFfwgruJSC/view?usp=sharing"
           }
         >
           {/* <IconButton variant={"ghost"} icon={<FaFilePdf />} /> */}
