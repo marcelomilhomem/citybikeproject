@@ -82,24 +82,24 @@ function Nav({ t }) {
         {language === "en" ? (
           <IconButton
             onClick={handleSwitch}
-            size={"sm"}
-            variant={"ghost"}
-            icon={
-              <img
-                alt="Portugal"
-                src="http://purecatamphetamine.github.io/country-flag-icons/3x2/PT.svg"
-              />
-            }
-          ></IconButton>
-        ) : (
-          <IconButton
-            onClick={handleSwitch}
             variant={"ghost"}
             size={"sm"}
             icon={
               <img
                 alt="United States"
                 src="http://purecatamphetamine.github.io/country-flag-icons/3x2/US.svg"
+              />
+            }
+          ></IconButton>
+        ) : (
+          <IconButton
+            onClick={handleSwitch}
+            size={"sm"}
+            variant={"ghost"}
+            icon={
+              <img
+                alt="Portugal"
+                src="http://purecatamphetamine.github.io/country-flag-icons/3x2/PT.svg"
               />
             }
           ></IconButton>
