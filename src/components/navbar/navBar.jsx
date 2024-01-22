@@ -20,8 +20,7 @@ import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import LanguageContext from "../../context/LanguageContext";
 import { withNamespaces } from "react-i18next";
-import { PT } from "country-flag-icons/react/3x2";
-import { US } from "country-flag-icons/react/3x2";
+import { PT, US } from "country-flag-icons/react/3x2";
 
 function Nav({ t }) {
   const { language, changeLanguage } = useContext(LanguageContext);
@@ -85,17 +84,28 @@ function Nav({ t }) {
             onClick={handleSwitch}
             size={"sm"}
             variant={"ghost"}
-            icon={<PT title="Portugal" className="..." />}
+            icon={
+              <img
+                alt="Portugal"
+                src="http://purecatamphetamine.github.io/country-flag-icons/3x2/PT.svg"
+              />
+            }
           ></IconButton>
         ) : (
           <IconButton
             onClick={handleSwitch}
             variant={"ghost"}
             size={"sm"}
-            icon={<US title="United States" className="..." />}
+            icon={
+              <img
+                alt="United States"
+                src="http://purecatamphetamine.github.io/country-flag-icons/3x2/US.svg"
+              />
+            }
           ></IconButton>
         )}
       </Center>
+
       {currentUser ? (
         <Menu>
           <MenuButton

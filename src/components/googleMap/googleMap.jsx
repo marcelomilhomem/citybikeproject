@@ -8,26 +8,19 @@ import {
 } from "@react-google-maps/api";
 import axios from "axios";
 import {
-  Alert,
-  AlertIcon,
   Box,
   Button,
   Card,
   CardBody,
   CardHeader,
-  Collapse,
-  Grid,
   GridItem,
   Heading,
   SimpleGrid,
   Stack,
   StackDivider,
   Text,
-  useDisclosure,
 } from "@chakra-ui/react";
-import Table from "../table/table";
 import { withNamespaces } from "react-i18next";
-import { FaMapMarkedAlt } from "react-icons/fa";
 
 function Map({ t }) {
   const { isLoaded } = useLoadScript({
