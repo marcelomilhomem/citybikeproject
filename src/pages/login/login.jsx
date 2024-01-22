@@ -70,8 +70,6 @@ function Login({ t }) {
             rounded={"md"}
             boxShadow={"xl"}
           />
-          {/*           <Heading fontSize={"6xl"}>{t("welcome")}</Heading>
-           */}{" "}
           <Text fontSize={"2xl"}>{t("welcome")} ✌️</Text>
           <Stack spacing={2}>
             <Stack
