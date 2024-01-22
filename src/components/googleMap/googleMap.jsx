@@ -158,7 +158,8 @@ function Map({ t }) {
         <Card>
           {showStations && (
             <Button
-              variant="ghost"
+              variant="outline"
+              colorScheme="gray"
               px={6}
               onClick={() => {
                 setShowStations(false);
@@ -217,7 +218,8 @@ function Map({ t }) {
                                 <Button
                                   onClick={() => setNetworkId(network.id)}
                                   size={"sm"}
-                                  variant={"ghost"}
+                                  variant="outline"
+                                  colorScheme="gray"
                                 >
                                   {t("checkStations")}
                                 </Button>
