@@ -77,19 +77,6 @@ function Nav({ t }) {
           <ChakraButton variant={"ghost"}>My CV</ChakraButton>
         </a>
       </motion.div>
-      <Tooltip hasArrow label="Linkedin" aria-label="linkedin">
-        <a
-          href="https://www.linkedin.com/in/marcelo-milhomem-79696422b/"
-          target="_blank"
-        >
-          <IconButton variant={"ghost"} icon={<AiFillLinkedin />} />
-        </a>
-      </Tooltip>
-      <Tooltip hasArrow label="Github" aria-label="github">
-        <a href="https://github.com/marcelomilhomem" target="_blank">
-          <IconButton variant={"ghost"} icon={<AiOutlineGithub />} />
-        </a>
-      </Tooltip>
       <Center>
         <Link onClick={handleSwitch}>{language === "en" ? "PT" : "EN"}</Link>
       </Center>
