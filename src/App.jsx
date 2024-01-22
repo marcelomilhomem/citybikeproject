@@ -8,6 +8,7 @@ import LandingPage from "./pages/landingPage/LandingPage";
 import MapPage from "./pages/mapPage/MapPage";
 import { LanguageProvider } from "./context/LanguageContext";
 import Login from "./pages/login/login";
+import Footer from "./components/footer/Footer";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
               }
             />
           </Routes>
+          <Footer />
         </AuthContextProvider>
       </LanguageProvider>
     </div>
