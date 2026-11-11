@@ -13,29 +13,12 @@ export const AuthContextProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState();
   const [loading, setLoading] = useState(true);
 
-  const signInWithGoogle = async () => {
-    try {
-      await signInWithPopup(auth, googleProvider);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // Errors are intentionally not caught here so the caller can show feedback.
+  const signInWithGoogle = () => signInWithPopup(auth, googleProvider);
 
-  const signInWithGithub = async () => {
-    try {
-      await signInWithPopup(auth, githubProvider);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const signInWithGithub = () => signInWithPopup(auth, githubProvider);
 
-  const signInAnony = async () => {
-    try {
-      await signInAnonymously(auth)
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  const signInAnony = () => signInAnonymously(auth);
 
   const navigate = useNavigate();
 
@@ -50,9 +33,9 @@ export const AuthContextProvider = ({ children }) => {
       setLoading(false);
     });
     return () => {
-      unsubscribe;
+      unsubscribe();
     };
-  });
+  }, []);
 
   return (
     <AuthContext.Provider

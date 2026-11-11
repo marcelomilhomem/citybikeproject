@@ -5,6 +5,7 @@ import {
   Heading,
   Text,
   useColorMode,
+  useToast,
   Box,
   Image,
 } from "@chakra-ui/react";
@@ -16,36 +17,47 @@ import { useNavigate } from "react-router-dom";
 import { withNamespaces } from "react-i18next";
 import { useEffect } from "react";
 
+// Maps Firebase auth error codes to translation keys.
+const LOGIN_ERROR_KEYS = {
+  "auth/popup-blocked": "loginErrorPopupBlocked",
+  "auth/unauthorized-domain": "loginErrorUnauthorizedDomain",
+  "auth/network-request-failed": "loginErrorNetwork",
+  "auth/account-exists-with-different-credential": "loginErrorAccountExists",
+};
+
 function Login({ t }) {
   const { signInWithGoogle, signInWithGithub, currentUser, signInAnony } =
     UserAuth();
   const navigate = useNavigate();
 
   const { colorMode } = useColorMode();
+  const toast = useToast();
 
-  const handleGoogleSignIn = async () => {
+  const handleSignIn = async (signIn) => {
     try {
-      await signInWithGoogle();
+      await signIn();
     } catch (error) {
-      console.log(error);
+      console.error(error);
+      // The user closing the popup isn't a failure worth reporting.
+      if (
+        error.code === "auth/popup-closed-by-user" ||
+        error.code === "auth/cancelled-popup-request"
+      ) {
+        return;
+      }
+      toast({
+        title: t("loginFailed"),
+        description: t(LOGIN_ERROR_KEYS[error.code] ?? "loginFailedDescription"),
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
     }
   };
 
-  const handleGithubSignIn = async () => {
-    try {
-      await signInWithGithub();
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const handleAnonySignIn = async () => {
-    try {
-      await signInAnony();
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const handleGoogleSignIn = () => handleSignIn(signInWithGoogle);
+  const handleGithubSignIn = () => handleSignIn(signInWithGithub);
+  const handleAnonySignIn = () => handleSignIn(signInAnony);
 
   useEffect(() => {
     if (currentUser !== null) {
