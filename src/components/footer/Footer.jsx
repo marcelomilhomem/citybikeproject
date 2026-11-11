@@ -8,7 +8,7 @@ import {
 import { withNamespaces } from "react-i18next";
 import { AiOutlineGithub, AiFillLinkedin } from "react-icons/ai";
 
-function Footer({ t }) {
+function Footer() {
   return (
     <Container as="footer" role="contentinfo" py={{ base: "12", md: "16" }}>
       <Stack spacing={{ base: "4", md: "5" }}>

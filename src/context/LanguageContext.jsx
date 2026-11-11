@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import { createContext, useState } from "react";
 import i18n from "../i18n";
 
 const LanguageContext = createContext();

@@ -9,18 +9,14 @@ import {
   Stack,
   Center,
   IconButton,
-  Tooltip,
   Button,
-  Link,
 } from "@chakra-ui/react";
 import { UserAuth } from "../../context/AuthContext";
-import { AiOutlineGithub, AiFillLinkedin } from "react-icons/ai";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import LanguageContext from "../../context/LanguageContext";
 import { withNamespaces } from "react-i18next";
-import { PT, US } from "country-flag-icons/react/3x2";
 
 function Nav({ t }) {
   const { language, changeLanguage } = useContext(LanguageContext);

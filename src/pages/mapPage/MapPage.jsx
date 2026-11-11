@@ -4,9 +4,6 @@ import {
   Container,
   Text,
   Stack,
-  Icon,
-  useColorModeValue,
-  createIcon,
 } from "@chakra-ui/react";
 import Map from "../../components/googleMap/googleMap";
 import Modal from "../../components/modal/Modal";

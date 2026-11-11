@@ -10,11 +10,10 @@ import {
   Stack,
   useDisclosure,
   ModalHeader,
-  IconButton,
   Heading,
 } from "@chakra-ui/react";
 import { FaMapMarkedAlt } from "react-icons/fa";
-import { SiGo, SiGooglemaps } from "react-icons/si";
+import { SiGooglemaps } from "react-icons/si";
 import { MdOutlinePedalBike } from "react-icons/md";
 import { motion } from "framer-motion";
 import { withNamespaces } from "react-i18next";

@@ -6,9 +6,7 @@ import {
   Image,
   Stack,
   Text,
-  useBreakpointValue,
   Box,
-  IconButton,
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import { withNamespaces } from "react-i18next";

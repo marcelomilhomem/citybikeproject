@@ -2,11 +2,8 @@ import {
   Flex,
   Stack,
   Button,
-  Heading,
   Text,
-  useColorMode,
   useToast,
-  Box,
   Image,
 } from "@chakra-ui/react";
 import { UserAuth } from "../../context/AuthContext";
@@ -30,7 +27,6 @@ function Login({ t }) {
     UserAuth();
   const navigate = useNavigate();
 
-  const { colorMode } = useColorMode();
   const toast = useToast();
 
   const handleSignIn = async (signIn) => {

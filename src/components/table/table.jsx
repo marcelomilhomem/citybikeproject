@@ -1,4 +1,3 @@
-import React from "react";
 import {
   TableContainer,
   Table as ChakraTable,
@@ -8,7 +7,7 @@ import {
 } from "@chakra-ui/react";
 import { withNamespaces } from "react-i18next";
 
-const Table = ({ address, freeBikes, city, t }) => {
+const Table = ({ freeBikes, t }) => {
   return (
     <TableContainer>
       <ChakraTable variant="unstyled">
