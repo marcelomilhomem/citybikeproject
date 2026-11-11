@@ -17,7 +17,7 @@ Bike data comes from the public [CityBikes API](https://api.citybik.es/v2/networ
 
 ## Getting started
 
-Prerequisites: Node.js and npm.
+Prerequisites: Node.js 20 or newer (26 recommended; the version in `.nvmrc`) and npm. With nvm, run `nvm use` in the project folder.
 
 ```bash
 npm install
